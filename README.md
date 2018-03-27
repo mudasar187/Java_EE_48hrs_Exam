@@ -1,7 +1,7 @@
 ## Java Enterprise Edition 1 PG5100
 
 <!--- Travis CI build status banner -->
-[![Build Status](https://travis-ci.org/mudasar187/Java_EE_48hrs_Exam.svg?branch=master)](https://travis-ci.org/mudasar187/Java_EE_48hrs_Exam)
+[![Build Status](https://travis-ci.com/mudasar187/Java_EE_48hrs_Exam.svg?branch=master)](https://travis-ci.com/mudasar187/Java_EE_48hrs_Exam)
 
 
 ## 48 Hours Exam Spring 2018
