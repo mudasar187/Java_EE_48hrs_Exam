@@ -10,5 +10,5 @@
 
 Also testing with Travis CI
 
-Also deployed to [Heroku](https://www.heroku.com/) , click on this url [https://quizgamespring.herokuapp.com/](https://quizgamespring.herokuapp.com/)
+Deployed to [Heroku](https://www.heroku.com/) , click on this url [https://quizgamespring.herokuapp.com/](https://quizgamespring.herokuapp.com/) to test the application
 
