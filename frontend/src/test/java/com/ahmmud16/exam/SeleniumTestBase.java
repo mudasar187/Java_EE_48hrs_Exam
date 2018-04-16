@@ -47,10 +47,6 @@ public abstract class SeleniumTestBase {
     @Before
     public void initTest() {
 
-        /*
-            we want to have a new session, otherwise the tests
-            will share the same Session beans
-         */
         getDriver().manage().deleteAllCookies();
 
         home = new IndexPO(getDriver(), getServerHost(), getServerPort());

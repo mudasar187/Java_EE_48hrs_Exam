@@ -1,19 +1,19 @@
 package com.ahmmud16.exam.service;
 
 import com.ahmmud16.exam.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 @Service
 @Transactional
 public class ResetService {
 
-    @PersistenceContext
+    @Autowired
     private EntityManager em;
 
     public void resetDatabase(){

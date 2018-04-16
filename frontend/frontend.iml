@@ -26,6 +26,7 @@
     </content>
     <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.flywaydb:flyway-core:3.2.1" level="project" />
     <orderEntry type="module" module-name="backend" />
     <orderEntry type="library" name="Maven: org.flywaydb:flyway-core:3.2.1" level="project" />
     <orderEntry type="library" name="Maven: org.joinfaces:jsf-spring-boot-starter:2.4.1" level="project" />
