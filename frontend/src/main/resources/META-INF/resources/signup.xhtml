@@ -26,8 +26,8 @@
                 <h:inputText id="username" value="#{signUpController.username}" class="login"/><br/>
                 <h:outputText value="Password: "/>
                 <h:inputSecret id="password" value="#{signUpController.password}" class="login"/><br/>
-                <h:outputText value="Username: "/>
-                <h:inputText id="retypepassword" value="#{signUpController.retypePassword}" class="login"/><br/>
+                <h:outputText value="Retype password: "/>
+                <h:inputSecret id="retypepassword" value="#{signUpController.retypePassword}" class="login"/><br/>
                 <br/>
                 <h:commandButton id="submit" value="Sign Up" action="#{signUpController.signUpUser}" class="defaultBtn"/>
             </div>

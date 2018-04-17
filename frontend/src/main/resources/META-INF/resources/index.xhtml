@@ -10,13 +10,13 @@
 <ui:composition template="/layout.xhtml">
 
     <ui:define name="title">
-        Exam
+        Index
     </ui:define>
 
 
     <ui:define name="content">
 
-        <h2>Exam</h2>
+        <h2>Welcome to my application</h2>
 
         <sec:authenticated>
 
@@ -26,7 +26,9 @@
 
 
         <sec:anonymous>
-           Welcome! Sign in to use website!
+           Please sign in.
+            <br/>
+            If you dont have an account, sign up and log in.
         </sec:anonymous>
 
     </ui:define>

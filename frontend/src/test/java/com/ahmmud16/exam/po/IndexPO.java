@@ -19,7 +19,7 @@ public class IndexPO extends LayoutPO {
 
     @Override
     public boolean isOnPage() {
-        return getDriver().getTitle().contains("Exam");
+        return getDriver().getTitle().contains("Index");
     }
 
 }

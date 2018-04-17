@@ -1,5 +1,6 @@
 package com.ahmmud16.exam;
 
+import com.ahmmud16.exam.SeleniumDriverConfig.SeleniumDriverHandler;
 import org.junit.AfterClass;
 import org.junit.AssumptionViolatedException;
 import org.junit.BeforeClass;

@@ -1,4 +1,4 @@
-package com.ahmmud16.exam;
+package com.ahmmud16.exam.SeleniumDriverConfig;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

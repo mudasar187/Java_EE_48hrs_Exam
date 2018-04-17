@@ -32,13 +32,13 @@ public abstract class SeleniumTestBase {
     private IndexPO home;
 
 
-    private IndexPO createNewUser(String username, String password){
+    private IndexPO createNewUser(String username, String password, String retypePassword){
 
         home.toStartingPage();
 
         SignUpPO signUpPO = home.toSignUp();
 
-        IndexPO indexPO = signUpPO.createUser(username, password);
+        IndexPO indexPO = signUpPO.createUser(username, password, retypePassword);
         assertNotNull(indexPO);
 
         return indexPO;
@@ -63,7 +63,8 @@ public abstract class SeleniumTestBase {
 
         String username = getUniqueId();
         String password = "123456789";
-        home = createNewUser(username, password);
+        String retypePassword = "123456789";
+        home = createNewUser(username, password, retypePassword);
 
         assertTrue(home.isLoggedIn());
         assertTrue(home.getDriver().getPageSource().contains(username));
