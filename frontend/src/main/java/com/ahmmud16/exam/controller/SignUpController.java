@@ -29,32 +29,40 @@ public class SignUpController {
 
     private String password;
 
+    private String retypePassword;
+
     public String signUpUser(){
 
         boolean registered = false;
-        try {
-            registered = userService.createUser(username, password);
-        }catch (Exception e){
-            //nothing to do
-        }
 
-        if(registered){
+        if(!retypePassword.equals(password)) {
+            return "/signup.jsf?faces-redirect=true&mismatchpassworderror=true";
+        } else {
 
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-                    userDetails,
-                    password,
-                    userDetails.getAuthorities());
-
-            authenticationManager.authenticate(token);
-
-            if (token.isAuthenticated()) {
-                SecurityContextHolder.getContext().setAuthentication(token);
+            try {
+                registered = userService.createUser(username, password);
+            } catch (Exception e) {
+                //nothing to do
             }
 
-            return "/index.jsf?faces-redirect=true";
-        } else {
-            return "/signup.jsf?faces-redirect=true&error=true";
+            if (registered) {
+
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+                        userDetails,
+                        password,
+                        userDetails.getAuthorities());
+
+                authenticationManager.authenticate(token);
+
+                if (token.isAuthenticated()) {
+                    SecurityContextHolder.getContext().setAuthentication(token);
+                }
+
+                return "/index.jsf?faces-redirect=true";
+            } else {
+                return "/signup.jsf?faces-redirect=true&error=true";
+            }
         }
     }
 
@@ -72,5 +80,13 @@ public class SignUpController {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRetypePassword() {
+        return retypePassword;
+    }
+
+    public void setRetypePassword(String retypePassword) {
+        this.retypePassword = retypePassword;
     }
 }

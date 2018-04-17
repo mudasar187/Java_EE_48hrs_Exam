@@ -17,13 +17,18 @@
         <h:form prependId="false">
             <div>
                 <h:outputLabel value="User and/or password are wrong."
-                               rendered="${!empty param['error']}"/>
+                               rendered="${!empty param['error']}"/><br/>
+
+                <h:outputLabel value="Sorry, but password mismatch. Please try again."
+                               rendered="${!empty param['mismatchpassworderror']}"/><br/>
 
                 <h:outputText value="Username: "/>
                 <h:inputText id="username" value="#{signUpController.username}" class="login"/><br/>
                 <h:outputText value="Password: "/>
                 <h:inputSecret id="password" value="#{signUpController.password}" class="login"/><br/>
-
+                <h:outputText value="Username: "/>
+                <h:inputText id="retypepassword" value="#{signUpController.retypePassword}" class="login"/><br/>
+                <br/>
                 <h:commandButton id="submit" value="Sign Up" action="#{signUpController.signUpUser}" class="defaultBtn"/>
             </div>
         </h:form>
