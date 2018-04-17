@@ -27,7 +27,7 @@
 <body>
 
 <sec:authenticated>
-    <p><h:outputText value="Hi #{userInfoController.userName} !"/></p>
+    <p><h:outputText value="Hello #{userInfoController.userName} !"/></p>
 
 
     <a id="logoutId" href="logout" class="btn">Log Out</a>
@@ -36,7 +36,6 @@
 
 
 <sec:anonymous>
-    <p>You are not logged in</p>
     <a id="linkToLoginId" href="login.jsf" class="btn">Log In</a>
     <a id="linkToSignupId" href="signup.jsf" class="btn" >Sign Up</a>
 </sec:anonymous>
@@ -49,7 +48,8 @@
 <hr/>
 
 <p>
-
+    Code available at: <a
+        href="https://github.com/mudasar187/Java_EE_48hrs_Exam" class="code">https://github.com/mudasar187/Java_EE_48hrs_Exam</a>
 </p>
 
 </body>
