@@ -1,4 +1,4 @@
-package com.ahmmud16.exam;
+package com.ahmmud16.exam.po;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;

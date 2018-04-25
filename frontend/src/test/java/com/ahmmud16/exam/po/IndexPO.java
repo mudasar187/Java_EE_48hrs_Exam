@@ -1,6 +1,5 @@
 package com.ahmmud16.exam.po;
 
-import com.ahmmud16.exam.PageObject;
 import org.openqa.selenium.WebDriver;
 
 public class IndexPO extends LayoutPO {

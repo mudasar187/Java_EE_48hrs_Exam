@@ -1,7 +1,5 @@
 package com.ahmmud16.exam.po;
 
-import com.ahmmud16.exam.PageObject;
-
 public class SignUpPO extends LayoutPO{
 
     public SignUpPO(PageObject other) {
