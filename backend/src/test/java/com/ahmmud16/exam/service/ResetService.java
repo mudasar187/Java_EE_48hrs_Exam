@@ -17,9 +17,8 @@ public class ResetService {
     private EntityManager em;
 
     public void resetDatabase(){
-        //Have to use native SQL for ElementCollection
-        Query query = em.createNativeQuery("delete from user_roles");
-        query.executeUpdate();
+
+        deleteEntityById("user_roles");
 
         deleteEntities(User.class);
     }
@@ -41,6 +40,12 @@ public class ResetService {
          */
 
         Query query = em.createQuery("delete from " + name);
+        query.executeUpdate();
+    }
+
+    //Have to use native SQL for ElementCollection
+    private void deleteEntityById(String tableName) {
+        Query query = em.createNativeQuery("delete from " + tableName);
         query.executeUpdate();
     }
 
