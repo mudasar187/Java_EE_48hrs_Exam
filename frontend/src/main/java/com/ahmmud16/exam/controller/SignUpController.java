@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Named
 @RequestScoped
@@ -26,19 +28,21 @@ public class SignUpController {
 
 
     private String username;
-
     private String password;
-
     private String retypePassword;
 
-    public String signUpUser(){
+    public String signUpUser() {
+
+        Pattern special = Pattern.compile("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
+        Matcher hasSpecial = special.matcher(username);
 
         boolean registered = false;
 
-        if(!retypePassword.equals(password)) {
+        if (!retypePassword.equals(password)) {
             return "/signup.jsf?faces-redirect=true&mismatchpassworderror=true";
+        } else if (hasSpecial.find()) {
+            return "/signup.jsf?faces-redirect=true&usernameinvaliderror=true";
         } else {
-
             try {
                 registered = userService.createUser(username, password);
             } catch (Exception e) {

@@ -1,6 +1,7 @@
 package com.ahmmud16.exam;
 
 import com.ahmmud16.exam.po.IndexPO;
+import com.ahmmud16.exam.po.LoginPO;
 import com.ahmmud16.exam.po.SignUpPO;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,28 +22,14 @@ public abstract class SeleniumTestBase {
 
     protected abstract int getServerPort();
 
-
     private static final AtomicInteger counter = new AtomicInteger(0);
 
     private String getUniqueId(){
-        return "foo_SeleniumLocalIT_" + counter.getAndIncrement();
+        return "fooSeleniumLocalIT" + counter.getAndIncrement();
     }
-
 
     private IndexPO home;
 
-
-    private IndexPO createNewUser(String username, String password, String retypePassword){
-
-        home.toStartingPage();
-
-        SignUpPO signUpPO = home.toSignUp();
-
-        IndexPO indexPO = signUpPO.createUser(username, password, retypePassword);
-        assertNotNull(indexPO);
-
-        return indexPO;
-    }
 
     @Before
     public void initTest() {
@@ -64,7 +51,13 @@ public abstract class SeleniumTestBase {
         String username = getUniqueId();
         String password = "123456789";
         String retypePassword = "123456789";
-        home = createNewUser(username, password, retypePassword);
+
+        home.toStartingPage();
+
+        SignUpPO signUpPO = home.toSignUp();
+
+        IndexPO indexPO = signUpPO.createUser(username, password, retypePassword);
+        assertNotNull(indexPO);
 
         assertTrue(home.isLoggedIn());
         assertTrue(home.getDriver().getPageSource().contains(username));
@@ -75,7 +68,113 @@ public abstract class SeleniumTestBase {
         assertFalse(home.getDriver().getPageSource().contains(username));
     }
 
+    @Test
+    public void testCreateUserWithInvalidUsername() {
 
+        String username = "username__";
+        String password = "123456789";
+        String retypePassword = "123456789";
 
+        SignUpPO signUpPO = home.toSignUp();
+
+        IndexPO indexPO = signUpPO.createUser(username, password, retypePassword);
+
+        assertNull(indexPO);
+        assertTrue(signUpPO.isOnPage());
+        assertFalse(home.isLoggedIn());
+
+    }
+
+    @Test
+    public void testCreateUserWithNonMatchPassword() {
+
+        String username = "username";
+        String password = "123456789";
+        String retypePassword = "1234";
+
+        SignUpPO signUpPO = home.toSignUp();
+
+        IndexPO indexPO = signUpPO.createUser(username, password, retypePassword);
+        assertNull(indexPO);
+        assertTrue(signUpPO.isOnPage());
+        assertFalse(home.isLoggedIn());
+    }
+
+    @Test
+    public void testLoginWithNonExistingUser() {
+
+        assertFalse(home.isLoggedIn());
+
+        String username = "usernameOne";
+        String password = "1234";
+
+        LoginPO loginPO = home.toLogin();
+        assertTrue(loginPO.isOnPage());
+
+        IndexPO indexPO = loginPO.enterCredentials(username, password);
+        assertNull(indexPO);
+        assertTrue(loginPO.isOnPage());
+        assertFalse(home.isLoggedIn());
+    }
+
+    @Test
+    public void testCreateAndThenLoginWithWrongPassword() {
+
+        assertFalse(home.isLoggedIn());
+
+        String username = "usernameTwo";
+        String password = "123456789";
+        String retypePassword = "123456789";
+        String wrongPassWord = "123";
+
+        SignUpPO signUpPO = home.toSignUp();
+
+        IndexPO indexPO = signUpPO.createUser(username, password, retypePassword);
+        assertTrue(home.getDriver().getPageSource().contains(username));
+        assertNotNull(indexPO);
+        assertTrue(home.isOnPage());
+
+        indexPO.doLogout();
+
+        assertTrue(home.isOnPage());
+
+        LoginPO loginPO = home.toLogin();
+        assertTrue(loginPO.isOnPage());
+
+        loginPO.enterCredentials(username, wrongPassWord);
+
+        assertNotNull(loginPO);
+        assertFalse(home.isLoggedIn());
+
+    }
+
+    @Test
+    public void testCreateTwoUsersWithSameUsername() {
+
+        assertFalse(home.isLoggedIn());
+
+        String username = "usernameThree";
+        String password = "123456789";
+        String retypePassword = "123456789";
+
+        home.toStartingPage();
+
+        SignUpPO signUpPO = home.toSignUp();
+
+        IndexPO indexPO = signUpPO.createUser(username, password, retypePassword);
+        assertNotNull(indexPO);
+
+        assertTrue(home.isLoggedIn());
+        assertTrue(home.getDriver().getPageSource().contains(username));
+
+        home.doLogout();
+
+        home.toSignUp();
+
+        IndexPO indexPO1 = signUpPO.createUser(username, password, retypePassword);
+        assertTrue(signUpPO.isOnPage());
+        assertNull(indexPO1);
+        assertFalse(home.isLoggedIn());
+    }
 
 }

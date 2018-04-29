@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Set;
 
 @Entity
@@ -12,6 +13,7 @@ public class User {
 
     @Id
     @NotBlank
+    @Pattern(regexp = "[A-Za-z0-9]{1,32}")
     private String username;
 
     @NotBlank
