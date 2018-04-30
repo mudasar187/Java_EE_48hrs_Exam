@@ -105,7 +105,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${version.springboot}</version>
                 <configuration>
-                    <finalName>examtest</finalName>
+                    <finalName>javaee_exam</finalName>
                     <classifier>exec</classifier>
                 </configuration>
                 <executions>
@@ -125,13 +125,13 @@
                     <artifactId>heroku-maven-plugin</artifactId>
                     <version>2.0.2</version>
                     <configuration>
-                        <appName>examjavaeetest</appName>
+                        <appName>navnet på hva appen heter i heroku</appName>
                         <includeTarget>false</includeTarget>
                         <includes>
-                            <include>target/examtest-exec.jar</include>
+                            <include>target/javaee_exam-exec.jar</include>
                         </includes>
                         <processTypes>
-                            <web>java -Dserver.port=$PORT -jar target/examtest-exec.jar</web>
+                            <web>java -Dserver.port=$PORT -jar target/javaee_exam-exec.jar</web>
                         </processTypes>
                     </configuration>
                 </plugin>

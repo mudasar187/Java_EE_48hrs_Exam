@@ -28,8 +28,11 @@
                 <h:outputText value="Password: "/>
                 <h:inputSecret id="password" value="#{signUpController.password}" class="login"/><br/>
                 <h:outputText value="Retype password: "/>
-                <h:inputSecret id="retypepassword" value="#{signUpController.retypePassword}" class="login"/><br/>
+                <h:inputSecret id="retypepassword" value="#{signUpController.retypePassword}" class="login"/>
                 <br/>
+                <br/>
+                <h:outputLabel value="Register as admin ?: "/>
+                <h:selectBooleanCheckbox value="#{signUpController.admin}" id="isAdmin"/><br/>
                 <h:commandButton id="submit" value="Sign Up" action="#{signUpController.signUpUser}" class="defaultBtn"/>
             </div>
         </h:form>

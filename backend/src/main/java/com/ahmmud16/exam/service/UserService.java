@@ -20,7 +20,7 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
 
-    public boolean createUser(String username, String password) {
+    public boolean createUser(String username, String password, boolean isAdmin) {
 
         String hashedPassword = passwordEncoder.encode(password);
 
@@ -31,11 +31,15 @@ public class UserService {
         User user = new User();
         user.setUsername(username);
         user.setPassword(hashedPassword);
-        user.setRoles(Collections.singleton("USER"));
+
+        if(isAdmin) {
+            user.setRoles(Collections.singleton("ROLE_ADMIN"));
+        } else {
+            user.setRoles(Collections.singleton("ROLE_USER"));
+        }
+
         user.setEnabled(true);
-
         em.persist(user);
-
         return true;
     }
 }

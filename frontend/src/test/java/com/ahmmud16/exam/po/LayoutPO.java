@@ -44,6 +44,15 @@ public abstract class LayoutPO extends PageObject {
         return po;
     }
 
+    public AdminPO toAdmin() {
+        clickAndWait("adminId");
+
+        AdminPO po = new AdminPO(this);
+        assertTrue(po.isOnPage());
+
+        return po;
+    }
+
     public boolean isLoggedIn(){
 
         return getDriver().findElements(By.id("logoutId")).size() > 0 &&

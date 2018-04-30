@@ -17,7 +17,8 @@ public class DefaultDataInitializerService {
     @PostConstruct
     public void initialize(){
 
-        attempt(() -> userService.createUser("tes", "123"));
+        attempt(() -> userService.createUser("foo", "123", false));
+        attempt(() -> userService.createUser("bar", "123", true));
 
     }
 

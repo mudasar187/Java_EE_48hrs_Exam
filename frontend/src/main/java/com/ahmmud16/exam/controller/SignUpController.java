@@ -30,6 +30,7 @@ public class SignUpController {
     private String username;
     private String password;
     private String retypePassword;
+    private boolean isAdmin;
 
     public String signUpUser() {
 
@@ -44,7 +45,7 @@ public class SignUpController {
             return "/signup.jsf?faces-redirect=true&usernameinvaliderror=true";
         } else {
             try {
-                registered = userService.createUser(username, password);
+                registered = userService.createUser(username, password, isAdmin);
             } catch (Exception e) {
                 //nothing to do
             }
@@ -92,5 +93,13 @@ public class SignUpController {
 
     public void setRetypePassword(String retypePassword) {
         this.retypePassword = retypePassword;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }
