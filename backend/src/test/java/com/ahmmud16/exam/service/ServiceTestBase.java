@@ -3,8 +3,12 @@ package com.ahmmud16.exam.service;
 import com.ahmmud16.exam.entity.User;
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.EntityManager;
+import java.util.Collection;
 
 public abstract class ServiceTestBase {
 

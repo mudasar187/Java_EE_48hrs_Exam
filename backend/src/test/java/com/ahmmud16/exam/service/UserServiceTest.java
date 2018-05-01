@@ -91,6 +91,7 @@ public class UserServiceTest extends ServiceTestBase {
         User getUserOne = getUser(userOne);
 
         assertEquals("a", getUserOne.getUsername());
+        assertTrue(getUserOne.getRoles().contains("ROLE_USER"));
 
         String userTwo = "b";
         String userTwoPassword = "123";
@@ -99,5 +100,6 @@ public class UserServiceTest extends ServiceTestBase {
         User getUserTwo = getUser(userTwo);
 
         assertEquals("b", getUserTwo.getUsername());
+        assertTrue(getUserTwo.getRoles().contains("ROLE_ADMIN"));
     }
 }
