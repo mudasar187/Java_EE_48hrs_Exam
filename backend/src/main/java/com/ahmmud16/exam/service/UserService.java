@@ -21,6 +21,9 @@ public class UserService {
 
 
     public boolean createUser(String username, String password, boolean isAdmin) {
+        if(username == null || username.isEmpty() || password == null || password.isEmpty()) {
+            return false;
+        }
 
         String hashedPassword = passwordEncoder.encode(password);
 
