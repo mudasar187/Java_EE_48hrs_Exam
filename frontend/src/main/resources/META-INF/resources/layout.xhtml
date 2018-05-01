@@ -27,13 +27,14 @@
 <body>
 
 <sec:authenticated>
+    <c:if test="#{userInfoController.userRoleUser}">
     <p><h:outputText value="Hello #{userInfoController.userName} !"/></p>
-
+    </c:if>
 
     <a id="logoutId" href="logout" class="btn">Log Out</a>
-    <c:if test="#{userInfoController.userRole}">
-    <br/>
-    <br/>
+
+    <c:if test="#{userInfoController.adminRoleUser}">
+        <p><h:outputText value="Hello admin #{userInfoController.userName} !"/></p>
     <p>You are registered as admin, click here to go to admin page</p>
     <a id="adminId" href="admin.jsf" class="btn">Go to admin</a>
     </c:if>

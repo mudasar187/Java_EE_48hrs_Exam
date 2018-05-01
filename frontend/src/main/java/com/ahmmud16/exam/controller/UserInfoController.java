@@ -22,15 +22,28 @@ public class UserInfoController {
     }
 
     /**
-     * Get user role
+     * Get ROLE_ADMIN
      * @return
      */
-    public boolean getUserRole() {
+    public boolean getAdminRoleUser() {
         Collection<? extends GrantedAuthority> role = ((UserDetails)SecurityContextHolder
                 .getContext()
                 .getAuthentication()
                 .getPrincipal())
                 .getAuthorities();
         return role.stream().anyMatch(e -> ((GrantedAuthority) e).getAuthority().contains("ROLE_ADMIN"));
+    }
+
+    /**
+     * Get ROLE_USER
+     */
+
+    public boolean getUserRoleUser() {
+        Collection<? extends GrantedAuthority> role = ((UserDetails)SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal())
+                .getAuthorities();
+        return role.stream().anyMatch(e -> ((GrantedAuthority) e).getAuthority().contains("ROLE_USER"));
     }
 }

@@ -21,8 +21,10 @@ public class UserServiceTest extends ServiceTestBase {
         String userPassword = "123";
 
         boolean isCreated = createUser(userId, userPassword, false);
-        assertTrue(isCreated);
+        boolean isEnabled = getUser(userId).getEnabled();
 
+        assertTrue(isCreated);
+        assertTrue(isEnabled);
     }
 
     @Test
