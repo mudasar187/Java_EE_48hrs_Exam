@@ -78,11 +78,7 @@ public class BookService {
 
         Book book = getBook(bookTitle);
 
-        if(book == null) {
-            return false;
-        }
-
-        if(book.getUsers().contains(username)) {
+        if(book == null || book.getUsers().contains(username)) {
             return false;
         }
 
@@ -95,11 +91,7 @@ public class BookService {
 
         Book book = getBook(bookTitle);
 
-        if(book == null) {
-            return false;
-        }
-
-        if(!book.getUsers().contains(username)) {
+        if(book == null || !book.getUsers().contains(username)) {
             return false;
         }
 
