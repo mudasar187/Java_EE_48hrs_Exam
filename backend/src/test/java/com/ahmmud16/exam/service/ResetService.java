@@ -1,6 +1,7 @@
 package com.ahmmud16.exam.service;
 
 import com.ahmmud16.exam.entity.Book;
+import com.ahmmud16.exam.entity.Message;
 import com.ahmmud16.exam.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,7 @@ public class ResetService {
 
         deleteEntities(Book.class);
         deleteEntities(User.class);
+        deleteEntities(Message.class);
     }
 
     private void deleteEntities(Class<?> entity){

@@ -16,14 +16,14 @@ public class BookService {
     @Autowired
     private EntityManager em;
 
-    public boolean createBook(String title, String author, String description, String course) {
+    public Long createBook(String title, String author, String description, String course) {
 
         TypedQuery<Book> query = em.createQuery("select b from Book b where b.bookTitle=?1", Book.class);
         query.setParameter(1, title);
         List<Book> books = query.getResultList();
 
         if(books.size() > 0) {
-            return false;
+            return null;
         }
 
         Book book = new Book();
@@ -34,7 +34,7 @@ public class BookService {
 
         em.persist(book);
 
-        return true;
+        return book.getBookId();
     }
 
     public Book getBook(String title) {

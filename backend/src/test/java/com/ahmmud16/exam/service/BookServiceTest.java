@@ -28,7 +28,9 @@ public class BookServiceTest extends ServiceTestBase {
         String description = "Java EE is AWESOME!";
         String course = "Enterprise Programming 1";
 
-        assertTrue(bookService.createBook(title, author, description, course));
+        Long id = bookService.createBook(title, author, description, course);
+
+        assertNotNull(id);
     }
 
     @Test
@@ -38,9 +40,11 @@ public class BookServiceTest extends ServiceTestBase {
         String description = "Java EE is AWESOME!";
         String course = "Enterprise Programming 1";
 
-        assertTrue(bookService.createBook(title, author, description, course));
+        Long a = bookService.createBook(title, author, description, course);
+        assertNotNull(a);
 
-        assertFalse(bookService.createBook(title, author, description, course));
+        Long b = bookService.createBook(title, author, description, course);
+        assertNull(b);
     }
 
     @Test
@@ -223,7 +227,9 @@ public class BookServiceTest extends ServiceTestBase {
 
         String user = "user";
 
-        assertTrue(bookService.createBook(title, author, description, course));
+        Long id = bookService.createBook(title, author, description, course);
+        assertNotNull(id);
+
         assertTrue(bookService.addUserToBook(user, title));
 
         List<Book> book = bookService.getAllBooksThatAreForSale();
