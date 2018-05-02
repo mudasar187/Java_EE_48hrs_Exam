@@ -28,24 +28,24 @@ public class SignUpController {
 
 
     private String username;
+    private String firstname;
+    private String lastname;
     private String password;
     private String retypePassword;
     private boolean isAdmin;
 
     public String signUpUser() {
 
-        Pattern special = Pattern.compile("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
-        Matcher hasSpecial = special.matcher(username);
+//        Pattern special = Pattern.compile("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
+//        Matcher hasSpecial = special.matcher(username);
 
         boolean registered = false;
 
         if (!retypePassword.equals(password)) {
             return "/signup.jsf?faces-redirect=true&mismatchpassworderror=true";
-        } else if (hasSpecial.find()) {
-            return "/signup.jsf?faces-redirect=true&usernameinvaliderror=true";
         } else {
             try {
-                registered = userService.createUser(username, password, isAdmin);
+                registered = userService.createUser(username, firstname, lastname, password, isAdmin);
             } catch (Exception e) {
                 //nothing to do
             }
@@ -77,6 +77,22 @@ public class SignUpController {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getPassword() {

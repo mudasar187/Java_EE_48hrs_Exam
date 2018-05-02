@@ -11,9 +11,9 @@ public class LoginPO extends LayoutPO{
         return getDriver().getTitle().contains("Login");
     }
 
-    public IndexPO enterCredentials(String userName, String password){
+    public IndexPO enterCredentials(String username, String password){
 
-        setText("username", userName);
+        setText("username", username);
         setText("password", password);
         clickAndWait("submit");
 

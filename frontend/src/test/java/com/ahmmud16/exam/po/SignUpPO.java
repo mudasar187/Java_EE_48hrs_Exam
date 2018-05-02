@@ -13,9 +13,11 @@ public class SignUpPO extends LayoutPO{
         return getDriver().getTitle().contains("Sign Up");
     }
 
-    public IndexPO createUser(String userName, String password, String retypePassword){
+    public IndexPO createUser(String username, String firstname, String lastname, String password, String retypePassword){
 
-        setText("username", userName);
+        setText("username", username);
+        setText("firstname", firstname);
+        setText("lastname", lastname);
         setText("password", password);
         setText("retypepassword", retypePassword);
         clickAndWait("submit");
@@ -28,11 +30,12 @@ public class SignUpPO extends LayoutPO{
         return null;
     }
 
-    public IndexPO createUserAsAdmin(String userName, String password, String retypePassword){
+    public IndexPO createUserAsAdmin(String username, String firstname, String lastname, String password, String retypePassword){
 
-        setText("username", userName);
+        setText("username", username);
+        setText("firstname", firstname);
+        setText("lastname", lastname);
         setText("password", password);
-        setText("retypepassword", retypePassword);
         driver.findElement(By.id("isAdmin")).click();
         clickAndWait("submit");
 

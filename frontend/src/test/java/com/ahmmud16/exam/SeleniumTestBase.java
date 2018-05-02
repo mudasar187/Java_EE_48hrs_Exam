@@ -50,12 +50,14 @@ public abstract class SeleniumTestBase {
         assertFalse(home.isLoggedIn());
 
         String username = getUniqueId();
+        String firstname = "test1";
+        String lastname = "test1";
         String password = "123456789";
         String retypePassword = "123456789";
 
         home.toStartingPage();
         SignUpPO signUpPO = home.toSignUp();
-        IndexPO indexPO = signUpPO.createUser(username, password, retypePassword);
+        IndexPO indexPO = signUpPO.createUser(username, firstname, lastname, password, retypePassword);
 
         assertNotNull(indexPO);
         assertTrue(home.isLoggedIn());
@@ -68,30 +70,16 @@ public abstract class SeleniumTestBase {
     }
 
     @Test
-    public void testCreateUserWithInvalidUsername() {
-
-        String username = "username__";
-        String password = "123456789";
-        String retypePassword = "123456789";
-
-        SignUpPO signUpPO = home.toSignUp();
-        IndexPO indexPO = signUpPO.createUser(username, password, retypePassword);
-
-        assertNull(indexPO);
-        assertTrue(signUpPO.isOnPage());
-        assertFalse(home.isLoggedIn());
-
-    }
-
-    @Test
     public void testCreateUserWithNonMatchPassword() {
 
-        String username = "username";
+        String username = "username@mail.com";
+        String firstname = "test2";
+        String lastname = "test2";
         String password = "123456789";
         String retypePassword = "1234";
 
         SignUpPO signUpPO = home.toSignUp();
-        IndexPO indexPO = signUpPO.createUser(username, password, retypePassword);
+        IndexPO indexPO = signUpPO.createUser(username, firstname, lastname, password, retypePassword);
 
         assertNull(indexPO);
         assertTrue(signUpPO.isOnPage());
@@ -103,7 +91,7 @@ public abstract class SeleniumTestBase {
 
         assertFalse(home.isLoggedIn());
 
-        String username = "usernameOne";
+        String username = "usernameOne@notexists.com";
         String password = "1234";
 
         LoginPO loginPO = home.toLogin();
@@ -122,13 +110,15 @@ public abstract class SeleniumTestBase {
 
         assertFalse(home.isLoggedIn());
 
-        String username = "usernameTwo";
+        String username = "test3@mail.com";
+        String firstname = "test3";
+        String lastname = "test3";
         String password = "123456789";
         String retypePassword = "123456789";
         String wrongPassWord = "123";
 
         SignUpPO signUpPO = home.toSignUp();
-        IndexPO indexPO = signUpPO.createUser(username, password, retypePassword);
+        IndexPO indexPO = signUpPO.createUser(username, firstname, lastname, password, retypePassword);
 
         assertTrue(home.getDriver().getPageSource().contains(username));
         assertNotNull(indexPO);
@@ -154,7 +144,9 @@ public abstract class SeleniumTestBase {
 
         assertFalse(home.isLoggedIn());
 
-        String username = "usernameThree";
+        String username = "test4@mail.com";
+        String firstname = "test4";
+        String lastname = "test4";
         String password = "123456789";
         String retypePassword = "123456789";
 
@@ -162,7 +154,7 @@ public abstract class SeleniumTestBase {
 
         SignUpPO signUpPO = home.toSignUp();
 
-        IndexPO indexPO = signUpPO.createUser(username, password, retypePassword);
+        IndexPO indexPO = signUpPO.createUser(username, firstname, lastname, password, retypePassword);
 
         assertNotNull(indexPO);
         assertTrue(home.isLoggedIn());
@@ -170,41 +162,11 @@ public abstract class SeleniumTestBase {
 
         home.doLogout();
         home.toSignUp();
-        IndexPO indexPO1 = signUpPO.createUser(username, password, retypePassword);
+
+        IndexPO indexPO1 = signUpPO.createUser(username, firstname, lastname, password, retypePassword);
 
         assertTrue(signUpPO.isOnPage());
         assertNull(indexPO1);
-        assertFalse(home.isLoggedIn());
-    }
-
-    @Test
-    public void createUserWithAdminAccess() {
-
-        assertFalse(home.isLoggedIn());
-
-        String username = "usernameFour";
-        String password = "123";
-        String retypePassword = "123";
-        String text = "You are registered as admin, click here to go to admin page";
-
-        home.toStartingPage();
-        SignUpPO signUpPO = home.toSignUp();
-
-        IndexPO indexPO = signUpPO.createUserAsAdmin(username, password, retypePassword);
-
-        assertNotNull(indexPO);
-        assertTrue(home.isLoggedIn());
-        assertTrue(home.getDriver().getPageSource().contains(username));
-        assertTrue(home.getDriver().getPageSource().contains(text));
-
-        AdminPO adminPO = home.toAdmin();
-
-        assertNotNull(adminPO);
-        assertTrue(adminPO.isOnPage());
-
-        home.doLogout();
-
-        assertTrue(home.isOnPage());
         assertFalse(home.isLoggedIn());
     }
 

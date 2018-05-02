@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -13,8 +14,16 @@ public class User {
 
     @Id
     @NotBlank
-    @Pattern(regexp = "[A-Za-z0-9]{1,32}")
+    @Size(max = 128)
     private String username;
+
+    @NotBlank
+    @Size(max = 32)
+    private String firstname;
+
+    @NotBlank
+    @Size(max = 32)
+    private String lastname;
 
     @NotBlank
     private String password;
@@ -34,6 +43,22 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getPassword() {

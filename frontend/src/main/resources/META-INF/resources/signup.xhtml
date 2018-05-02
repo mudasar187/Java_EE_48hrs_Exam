@@ -20,13 +20,19 @@
                                rendered="${!empty param['error']}"/>
                 <h:outputLabel value="Sorry, but password mismatch. Please try again."
                                rendered="${!empty param['mismatchpassworderror']}"/>
-                <h:outputLabel value="Sorry, only letters and numbers are allowed in username. Please try again."
-                               rendered="${!empty param['usernameinvaliderror']}"/><br/>
 
-                <h:outputText value="Username: "/>
+                <h:outputText value="Email: "/>
                 <h:inputText id="username" value="#{signUpController.username}" class="login"/><br/>
+
+                <h:outputText value="Firstname: "/>
+                <h:inputText id="firstname" value="#{signUpController.firstname}" class="login"/><br/>
+
+                <h:outputText value="Lastname: "/>
+                <h:inputText id="lastname" value="#{signUpController.lastname}" class="login"/><br/>
+
                 <h:outputText value="Password: "/>
                 <h:inputSecret id="password" value="#{signUpController.password}" class="login"/><br/>
+
                 <h:outputText value="Retype password: "/>
                 <h:inputSecret id="retypepassword" value="#{signUpController.retypePassword}" class="login"/>
                 <br/>

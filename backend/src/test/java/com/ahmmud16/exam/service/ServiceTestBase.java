@@ -27,8 +27,8 @@ public abstract class ServiceTestBase {
         deleteService.resetDatabase();
     }
 
-    protected boolean createUser(String user, String password, boolean isAdmin){
-        return userService.createUser(user,password,isAdmin);
+    protected boolean createUser(String username, String firstname, String lastname, String password, boolean isAdmin){
+        return userService.createUser(username, firstname, lastname,password,isAdmin);
     }
 
     protected User getUser(String username) {

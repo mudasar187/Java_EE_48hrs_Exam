@@ -24,10 +24,7 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
 
-    public boolean createUser(String username, String password, boolean isAdmin) {
-        if(username == null || username.isEmpty() || password == null || password.isEmpty()) {
-            return false;
-        }
+    public boolean createUser(String username, String firstname, String lastname, String password, boolean isAdmin) {
 
         String hashedPassword = passwordEncoder.encode(password);
 
@@ -37,6 +34,8 @@ public class UserService {
 
         User user = new User();
         user.setUsername(username);
+        user.setFirstname(firstname);
+        user.setLastname(lastname);
         user.setPassword(hashedPassword);
 
         if(isAdmin) {

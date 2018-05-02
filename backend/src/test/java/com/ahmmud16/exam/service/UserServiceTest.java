@@ -17,11 +17,13 @@ public class UserServiceTest extends ServiceTestBase {
     @Test
     public void testCanCreateUser() {
 
-        String userId = "a";
-        String userPassword = "123";
+        String username = "a@mail.com";
+        String firstname = "a";
+        String lastname = "b";
+        String password = "123";
 
-        boolean isCreated = createUser(userId, userPassword, false);
-        boolean isEnabled = getUser(userId).getEnabled();
+        boolean isCreated = createUser(username, firstname, lastname, password, false);
+        boolean isEnabled = getUser(username).getEnabled();
 
         assertTrue(isCreated);
         assertTrue(isEnabled);
@@ -30,37 +32,30 @@ public class UserServiceTest extends ServiceTestBase {
     @Test
     public void testCreateUserWithNull() {
 
-        String userId = null;
-        String userPassword = null;
+        String username = null;
+        String firstname = null;
+        String lastname = null;
+        String password = null;
 
         try {
-            createUser(userId, userPassword, false);
+            createUser(username, firstname, lastname, password, false);
+            fail();
         } catch (Exception e) {
             // excepted
         }
     }
 
     @Test
-    public void testCanCreateUserWithInvalidRegEx() {
-
-        String userId = "a@";
-        String userPassword = "123";
-
-        try{
-            createUser(userId, userPassword, false);
-        } catch (Exception e) {
-            // expected
-        }
-    }
-
-    @Test
     public void testCanCreateWithWhiteSpaces() {
 
-        String userId = "     ";
-        String userPassword = "123";
+        String username = "     ";
+        String firstname = "a";
+        String lastname = "a";
+        String password = "123";
 
         try {
-            createUser(userId, userPassword, false);
+            createUser(username, firstname, lastname, password, false);
+            fail();
         } catch (Exception e) {
             // expected
         }
@@ -69,16 +64,20 @@ public class UserServiceTest extends ServiceTestBase {
     @Test
     public void testCreateTwoUserWithSameId() {
 
-        String userOne = "a";
+        String userOneUsername = "a@mail.com";
+        String userOneFirstname = "a";
+        String userOneLastname = "b";
         String userOnePassword = "123";
 
-        boolean isUserOneCreated = createUser(userOne, userOnePassword, false);
+        boolean isUserOneCreated = createUser(userOneUsername, userOneFirstname, userOneLastname, userOnePassword, false);
         assertTrue(isUserOneCreated);
 
-        String userTwo = "a";
+        String userTwoUsername = "a@mail.com";
+        String userTwoFirstname = "a";
+        String userTwoLastname = "b";
         String userTwoPassword = "123";
 
-        boolean isUserTwoCreated = createUser(userTwo, userTwoPassword, false);
+        boolean isUserTwoCreated = createUser(userTwoUsername, userTwoFirstname, userTwoLastname, userTwoPassword, false);
         assertFalse(isUserTwoCreated);
 
     }
@@ -86,22 +85,40 @@ public class UserServiceTest extends ServiceTestBase {
     @Test
     public void testWhichRoleUserHave() {
 
-        String userOne = "a";
+        String userOneUsername = "a@mail.com";
+        String userOneFirstname = "a";
+        String userOneLastname = "b";
         String userOnePassword = "123";
 
-        createUser(userOne, userOnePassword, false);
-        User getUserOne = getUser(userOne);
+        createUser(userOneUsername, userOneFirstname, userOneLastname, userOnePassword, false);
+        User getUserOne = getUser(userOneUsername);
 
-        assertEquals("a", getUserOne.getUsername());
         assertTrue(getUserOne.getRoles().contains("ROLE_USER"));
 
-        String userTwo = "b";
+        String userTwoUsername = "aa@mail.com";
+        String userTwoFirstname = "a";
+        String userTwoLastname = "b";
         String userTwoPassword = "123";
 
-        createUser(userTwo, userTwoPassword, true);
-        User getUserTwo = getUser(userTwo);
+        createUser(userTwoUsername, userTwoFirstname, userTwoLastname, userTwoPassword, true);
+        User getUserTwo = getUser(userTwoUsername);
 
-        assertEquals("b", getUserTwo.getUsername());
         assertTrue(getUserTwo.getRoles().contains("ROLE_ADMIN"));
+    }
+
+    @Test
+    public void testUserCredentials() {
+
+        String username = "a@mail.com";
+        String firstname = "a";
+        String lastname = "b";
+        String password = "123";
+
+        createUser(username, firstname, lastname, password, false);
+        User user = getUser(username);
+
+        assertEquals("a@mail.com", user.getUsername());
+        assertEquals("a", user.getFirstname());
+        assertEquals("b", user.getLastname());
     }
 }
