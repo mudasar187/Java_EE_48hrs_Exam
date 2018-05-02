@@ -18,11 +18,11 @@ public class User {
     private String username;
 
     @NotBlank
-    @Size(max = 32)
+    @Size(max = 128)
     private String firstname;
 
     @NotBlank
-    @Size(max = 32)
+    @Size(max = 128)
     private String lastname;
 
     @NotBlank
