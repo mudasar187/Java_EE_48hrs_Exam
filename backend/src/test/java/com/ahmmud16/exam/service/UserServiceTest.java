@@ -22,11 +22,8 @@ public class UserServiceTest extends ServiceTestBase {
         String lastname = "b";
         String password = "123";
 
-        boolean isCreated = createUser(username, firstname, lastname, password, false);
-        boolean isEnabled = getUser(username).getEnabled();
-
-        assertTrue(isCreated);
-        assertTrue(isEnabled);
+        assertTrue(createUser(username, firstname, lastname, password, false));
+        assertTrue(getUser(username).getEnabled());
     }
 
     @Test
@@ -69,16 +66,14 @@ public class UserServiceTest extends ServiceTestBase {
         String userOneLastname = "b";
         String userOnePassword = "123";
 
-        boolean isUserOneCreated = createUser(userOneUsername, userOneFirstname, userOneLastname, userOnePassword, false);
-        assertTrue(isUserOneCreated);
+        assertTrue(createUser(userOneUsername, userOneFirstname, userOneLastname, userOnePassword, false));
 
         String userTwoUsername = "a@mail.com";
         String userTwoFirstname = "a";
         String userTwoLastname = "b";
         String userTwoPassword = "123";
 
-        boolean isUserTwoCreated = createUser(userTwoUsername, userTwoFirstname, userTwoLastname, userTwoPassword, false);
-        assertFalse(isUserTwoCreated);
+        assertFalse(createUser(userTwoUsername, userTwoFirstname, userTwoLastname, userTwoPassword, false));
 
     }
 
