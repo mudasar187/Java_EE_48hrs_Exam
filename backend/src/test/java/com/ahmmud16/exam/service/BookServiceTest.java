@@ -211,4 +211,24 @@ public class BookServiceTest extends ServiceTestBase {
         assertEquals(1, book1.getUsers().size());
     }
 
+    @Test
+    public void testGetAllBooksForSale() {
+
+        assertNull(bookService.getAllBooksThatAreForSale());
+
+        String title = "JavaEE";
+        String author = "Andrea Arcuri";
+        String description = "Java EE is AWESOME!";
+        String course = "Enterprise Programming 1";
+
+        String user = "user";
+
+        assertTrue(bookService.createBook(title, author, description, course));
+        assertTrue(bookService.addUserToBook(user, title));
+
+        List<Book> book = bookService.getAllBooksThatAreForSale();
+        assertEquals(1, book.size());
+
+    }
+
 }

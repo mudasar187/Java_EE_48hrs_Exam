@@ -74,6 +74,18 @@ public class BookService {
         return books;
     }
 
+    public List<Book> getAllBooksThatAreForSale() {
+
+        TypedQuery<Book> query = em.createQuery("select b from Book b where size(b.users) > 0", Book.class);
+        List<Book> books = query.getResultList();
+
+        if(books.size() == 0) {
+            return null;
+        }
+
+        return books;
+    }
+
     public boolean addUserToBook(String username, String bookTitle) {
 
         Book book = getBook(bookTitle);
