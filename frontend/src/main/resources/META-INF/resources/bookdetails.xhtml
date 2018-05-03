@@ -38,6 +38,15 @@
                         <f:facet name="header">Sellers</f:facet>
                         <h:outputLabel value="#{seller}"/>
                     </h:column>
+                    <sec:authenticated>
+                    <h:column>
+                        <f:facet name="header">Contact seller</f:facet>
+                        <h:form>
+                            <h:commandButton value="Send message" action="#{messageController.sendMessage(seller)}" id="goToDetailsId" class="btn">
+                            </h:commandButton>
+                        </h:form>
+                    </h:column>
+                    </sec:authenticated>
                 </h:dataTable>
             </c:if>
             <c:if test="#{bookController.sellers.size() == 0}">
