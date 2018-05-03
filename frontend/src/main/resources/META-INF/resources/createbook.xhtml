@@ -18,25 +18,26 @@
         <!--NEW BOOK START-->
         <!-- Accessible only for admins-->
         <div class="showTable">
-        <c:if test="#{userInfoController.adminRoleUser}">
-            <h:form id="createBookForm">
-                <h:panelGrid columns="1">
-                    <h:outputLabel value="Book title: "/>
-                    <h:inputText value="#{bookController.formBookTitle}" id="bookTitle"/><br/>
+            <c:if test="#{userInfoController.adminRoleUser}">
+                <h:form id="createBookForm">
+                    <h:panelGrid columns="1">
+                        <h:outputLabel value="Book title: "/>
+                        <h:inputText value="#{bookController.formBookTitle}" id="bookTitle"/><br/>
 
-                    <h:outputLabel value="Book author: "/>
-                    <h:inputText value="#{bookController.formBookAuthor}" id="bookAuthor"/><br/>
+                        <h:outputLabel value="Book author: "/>
+                        <h:inputText value="#{bookController.formBookAuthor}" id="bookAuthor"/><br/>
 
-                    <h:outputLabel value="Book course : "/>
-                    <h:inputText value="#{bookController.formBookCourse}" id="bookCourse"/><br/>
+                        <h:outputLabel value="Book course : "/>
+                        <h:inputText value="#{bookController.formBookCourse}" id="bookCourse"/><br/>
 
-                    <h:outputLabel value="Book description: "/>
-                    <h:inputTextarea value="#{bookController.formBookDescription}" id="bookDescription"/><br/>
+                        <h:outputLabel value="Book description: "/>
+                        <h:inputTextarea value="#{bookController.formBookDescription}" id="bookDescription"/><br/>
 
-                    <h:commandButton value="Add book" action="#{bookController.createBook}" id="createButton" class="defaultBtn"/>
-                </h:panelGrid>
-            </h:form>
-        </c:if>
+                        <h:commandButton value="Add book" action="#{bookController.createBook}" id="createBookButton"
+                                         class="defaultBtn"/>
+                    </h:panelGrid>
+                </h:form>
+            </c:if>
         </div>
         <!--NEW BOOK END-->
 

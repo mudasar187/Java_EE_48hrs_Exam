@@ -28,7 +28,7 @@
 
 <sec:authenticated>
     <c:if test="#{userInfoController.userRoleUser}">
-    <p><h:outputText value="Hello #{userInfoController.userName} !"/></p>
+        <p><h:outputText value="Hello #{userInfoController.userName} !"/></p>
     </c:if>
 
     <a id="logoutId" href="/logout" class="btn">Log Out</a>
@@ -36,24 +36,25 @@
 </sec:authenticated>
 
 <br/>
-<a id="linkToHomeId" href="index.jsf" class="btn">Home</a>
+<a id="linkToHomeId" href="/index.jsf" class="btn">Home</a>
 <br/>
 
 <sec:anonymous>
     <a id="linkToLoginId" href="login.jsf" class="btn">Log In</a>
-    <a id="linkToSignupId" href="signup.jsf" class="btn" >Sign Up</a>
+    <a id="linkToSignupId" href="signup.jsf" class="btn">Sign Up</a>
     <br/>
 </sec:anonymous>
 
 <hr/>
 
-<ui:insert name="content" />
+<ui:insert name="content"/>
 
 <hr/>
 
 <p>
     Code available at: <a
-        href="https://github.com/mudasar187/Java_EE_48hrs_Exam" class="code">https://github.com/mudasar187/Java_EE_48hrs_Exam</a>
+        href="https://github.com/mudasar187/Java_EE_48hrs_Exam"
+        class="code">https://github.com/mudasar187/Java_EE_48hrs_Exam</a>
 </p>
 
 </body>
