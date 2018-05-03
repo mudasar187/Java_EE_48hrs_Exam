@@ -43,26 +43,19 @@ public class BookService {
         List<Book> books = query.getResultList();
 
         if(books.size() == 0) {
-            return null;
+            throw new IllegalArgumentException("Book " + title + " not exists!");
         }
 
         return books.get(0);
     }
 
     public boolean deleteBook(String title) {
-
         Book book = getBook(title);
-
-        if(book == null) {
-            return false;
-        }
-
         em.remove(book);
-
         return true;
     }
 
-    public List<Book> getAllBook() {
+    public List<Book> getAllBooks() {
 
         TypedQuery<Book> query = em.createQuery("select c from Book c", Book.class);
         List<Book> books = query.getResultList();
@@ -86,29 +79,30 @@ public class BookService {
         return books;
     }
 
-    public boolean addUserToBook(String username, String bookTitle) {
+    public boolean addOrRemoveUserFromBookList(String username, String bookTitle, boolean add) {
 
         Book book = getBook(bookTitle);
 
-        if(book == null || book.getUsers().contains(username)) {
-            return false;
+        if(add) {
+            if(checkIfUserExistsInTheBookList(username, bookTitle)) {
+                return false;
+            }
+            book.getUsers().add(username);
+        } else {
+            if(!checkIfUserExistsInTheBookList(username, bookTitle)) {
+                return false;
+            }
+            book.getUsers().remove(username);
         }
-
-        book.getUsers().add(username);
 
         return true;
     }
 
-    public boolean removeUserFromBook(String username, String bookTitle) {
+    public boolean checkIfUserExistsInTheBookList(String username, String bookTitle) {
 
         Book book = getBook(bookTitle);
 
-        if(book == null || !book.getUsers().contains(username)) {
-            return false;
-        }
+        return book.getUsers().contains(username);
 
-        book.getUsers().remove(username);
-
-        return true;
     }
 }

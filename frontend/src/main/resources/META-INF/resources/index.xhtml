@@ -4,7 +4,7 @@
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:sec="http://www.springframework.org/security/tags"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
 >
 
 <ui:composition template="/layout.xhtml">
@@ -16,19 +16,45 @@
 
     <ui:define name="content">
 
-        <h2>Welcome to my application</h2>
+        <h2>UsedBooks Application</h2>
+        <br/>
+        <br/>
+        <div class="showBookTable">
+            <c:set var="bookList" value="#{bookController.allBooks}"/>
 
-        <sec:authenticated>
+            <c:if test="#{bookList.size() != 0}">
+                <h:dataTable value="#{bookList}" var="books" border="1" id="bookTable">
 
-            Welcome !
-
-        </sec:authenticated>
-
-
+                    <h:column>
+                        <f:facet name="header">Book Name</f:facet>
+                        <h:outputLabel value="#{books.bookTitle}" class="bookName"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Course</f:facet>
+                        <h:outputLabel value="#{books.bookAuthor}" class="bookCourse"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Sellers</f:facet>
+                        <h:outputLabel value="#{books.users.size()}" class="bookSellers"/>
+                    </h:column>
+                    <sec:authenticated>
+                        <h:column>
+                            <f:facet name="header">Want to sell book? Get on the list</f:facet>
+                            <h:form>
+                                <h:commandButton value="Add me to list" id="linkToAddUserToBook" action="#{bookController.addUserToBook(userInfoController.userName, books.bookTitle)}" disabled="#{bookController.isUserInBookList(userInfoController.userName, books.bookTitle)}" class="btn"/>
+                                <h:commandButton value="Remove me from list" id="linkToRemoveFromToBook" action="#{bookController.removeUserFromBook(userInfoController.userName, books.bookTitle)}" disabled="#{!bookController.isUserInBookList(userInfoController.userName, books.bookTitle)}" class="btn"/>
+                            </h:form>
+                        </h:column>
+                    </sec:authenticated>
+                </h:dataTable>
+            </c:if>
+        </div>
+        <br/>
+        <br/>
         <sec:anonymous>
-           Please sign in.
+            Please sign in to trade books.
             <br/>
-            If you dont have an account, sign up and log in.
+            If you dont have an account, please sign up and log in.
         </sec:anonymous>
 
     </ui:define>

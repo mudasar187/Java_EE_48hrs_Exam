@@ -49,4 +49,20 @@ a:visited{
     color: rgb(195, 136, 195)
 }
 
+.showBookTable{
+    width: 100%;
+    display: block;
+}
+
+#bookTable{
+    position: relative;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.btn:disabled{
+    background-color: rgb(128, 128, 128);
+    opacity: 0.7;
+}
+
 

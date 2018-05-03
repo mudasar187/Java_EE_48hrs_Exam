@@ -68,7 +68,12 @@ public class BookServiceTest extends ServiceTestBase {
     @Test
     public void testGetBookNotExist() {
 
-        assertNull(bookService.getBook("nonExsists"));
+        try {
+            assertNull(bookService.getBook("nonExsists"));
+            fail();
+        } catch (Exception e) {
+            // excepted
+        }
     }
 
     @Test
@@ -86,13 +91,23 @@ public class BookServiceTest extends ServiceTestBase {
     @Test
     public void deleteBookWhichNotExists() {
 
-        assertFalse(bookService.deleteBook("notExists"));
+        try {
+            assertFalse(bookService.deleteBook("notExists"));
+            fail();
+        } catch (Exception e){
+            // excepted
+        }
     }
 
     @Test
     public void testAddUserToABookThatNotExists() {
 
-        assertFalse(bookService.addUserToBook("notExists", "user@mail.com"));
+        try {
+            assertFalse(bookService.addOrRemoveUserFromBookList("notExists", "user@mail.com", true));
+            fail();
+        } catch (Exception e) {
+            // excepted
+        }
     }
 
     @Test
@@ -107,8 +122,8 @@ public class BookServiceTest extends ServiceTestBase {
 
         String user = "userOne@mail.com";
 
-        assertTrue(bookService.addUserToBook(user, title));
-        assertFalse(bookService.addUserToBook(user, title));
+        assertTrue(bookService.addOrRemoveUserFromBookList(user, title, true));
+        assertFalse(bookService.addOrRemoveUserFromBookList(user, title, true));
     }
 
     @Test
@@ -117,7 +132,11 @@ public class BookServiceTest extends ServiceTestBase {
         String bookTitle = "notExists";
         String username = "user@mail.com";
 
-        assertFalse(bookService.removeUserFromBook(username, bookTitle));
+         try {
+             assertFalse(bookService.addOrRemoveUserFromBookList(username, bookTitle, false));
+         } catch (Exception e) {
+             // excepted
+         }
     }
 
     @Test
@@ -131,7 +150,7 @@ public class BookServiceTest extends ServiceTestBase {
 
         String user = "notExsists";
 
-        assertFalse(bookService.removeUserFromBook(user, title));
+        assertFalse(bookService.addOrRemoveUserFromBookList(user, title, false));
 
     }
 
@@ -140,7 +159,7 @@ public class BookServiceTest extends ServiceTestBase {
     @Test
     public void testGetAllBooks() {
 
-        assertNull(bookService.getAllBook());
+        assertNull(bookService.getAllBooks());
 
         String title1 = "JavaEE";
         String author1 = "Andrea Arcuri";
@@ -156,7 +175,7 @@ public class BookServiceTest extends ServiceTestBase {
 
         bookService.createBook(title2, author2, description2, course2);
 
-        List<Book> list = bookService.getAllBook();
+        List<Book> list = bookService.getAllBooks();
 
         assertEquals(2, list.size());
     }
@@ -173,8 +192,8 @@ public class BookServiceTest extends ServiceTestBase {
 
         bookService.createBook(title, author, description, course);
 
-        assertTrue(bookService.addUserToBook(userOne, title));
-        assertTrue(bookService.addUserToBook(userTwo, title));
+        assertTrue(bookService.addOrRemoveUserFromBookList(userOne, title, true));
+        assertTrue(bookService.addOrRemoveUserFromBookList(userTwo, title, true));
 
         Book book = bookService.getBook(title);
 
@@ -197,8 +216,8 @@ public class BookServiceTest extends ServiceTestBase {
         bookService.createBook(title, author, description, course);
 
 
-        assertTrue(bookService.addUserToBook(userOne, title));
-        assertTrue(bookService.addUserToBook(userTwo, title));
+        assertTrue(bookService.addOrRemoveUserFromBookList(userOne, title, true));
+        assertTrue(bookService.addOrRemoveUserFromBookList(userTwo, title, true));
 
         Book book = bookService.getBook(title);
 
@@ -206,7 +225,7 @@ public class BookServiceTest extends ServiceTestBase {
         assertTrue(book.getUsers().contains(userTwo));
         assertEquals(2, book.getUsers().size());
 
-        bookService.removeUserFromBook(userOne, title);
+        bookService.addOrRemoveUserFromBookList(userOne, title, false);
 
         Book book1 = bookService.getBook(title);
 
@@ -230,7 +249,7 @@ public class BookServiceTest extends ServiceTestBase {
         Long id = bookService.createBook(title, author, description, course);
         assertNotNull(id);
 
-        assertTrue(bookService.addUserToBook(user, title));
+        assertTrue(bookService.addOrRemoveUserFromBookList(user, title, true));
 
         List<Book> book = bookService.getAllBooksThatAreForSale();
         assertEquals(1, book.size());
