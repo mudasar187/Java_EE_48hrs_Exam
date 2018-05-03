@@ -19,23 +19,20 @@ public class MessageService {
     private EntityManager em;
 
 
-    public Long sendMessage(String fromSender, String toReceiver, String text) {
+    public Long sendMessage(String sender, String receiver, String text) {
 
-        User sender = em.find(User.class, fromSender);
-        User receiver = em.find(User.class, toReceiver);
+        User senderUser = em.find(User.class, sender);
+        User receiverUser = em.find(User.class, receiver);
 
-        if(sender == null) {
-            throw new IllegalArgumentException("Sender not exists " + fromSender);
-        }
-        if(receiver == null) {
-            throw new IllegalArgumentException("Receiver not exists " + toReceiver);
+        if(senderUser == null || receiverUser == null) {
+            throw new IllegalArgumentException("User not exists!");
         }
 
 
         Message message = new Message();
         message.setCreatedTime(new Date());
-        message.setSenderEmail(sender.getUsername());
-        message.setReceiverEmail(receiver.getUsername());
+        message.setSenderEmail(sender);
+        message.setReceiverEmail(receiver);
         message.setText(text);
 
         em.persist(message);

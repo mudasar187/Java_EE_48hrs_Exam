@@ -29,14 +29,12 @@ public class BookController implements Serializable {
         return bookService.getAllBooks();
     }
 
-    public String addUserToBook(String username, String title) {
+    public void addUserToBook(String username, String title) {
         bookService.addOrRemoveUserFromBookList(username, title, true);
-        return "index.jsf";
     }
 
-    public String removeUserFromBook(String username, String title) {
+    public void removeUserFromBook(String username, String title) {
         bookService.addOrRemoveUserFromBookList(username, title, false);
-        return "index.jsf";
     }
 
     public boolean isUserInBookList(String username, String title) {
@@ -57,9 +55,8 @@ public class BookController implements Serializable {
         return "/bookdetails.jsf?faces-redirect=true";
     }
 
-    public String deleteBook(String title) {
+    public void deleteBook(String title) {
         bookService.deleteBook(title);
-        return "index.jsf";
     }
 
     /**
