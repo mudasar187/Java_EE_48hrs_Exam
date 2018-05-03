@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:sec="http://www.springframework.org/security/tags"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+>
+
+
+<ui:composition template="/layout.xhtml">
+
+    <ui:define name="title">
+        Book Details
+    </ui:define>
+
+
+    <ui:define name="content">
+
+        <h2>
+           Book Details
+        </h2>
+
+        <h:outputLabel value="Title: #{bookController.book.bookTitle}"/>
+        <br/>
+        <h:outputLabel value="Author: #{bookController.book.bookAuthor}"/>
+        <br/>
+        <h:outputLabel value="Description: #{bookController.book.bookDescription}"/>
+        <br/>
+        <h:outputLabel value="Course: #{bookController.book.courseWhereBookIsUsed}"/>
+        <br/>
+        <br/>
+        <div class="showTable">
+            <c:set var="sellers" value="#{bookController.sellers}"/>
+
+            <c:if test="#{sellers.size() != 0}">
+                <h:dataTable value="#{sellers}" var="seller" border="1" id="sellerTable">
+                    <h:column>
+                        <f:facet name="header">Sellers</f:facet>
+                        <h:outputLabel value="#{seller}"/>
+                    </h:column>
+                </h:dataTable>
+            </c:if>
+            <c:if test="#{bookController.sellers.size() == 0}">
+                <h2>Nobody sell this book, try again later</h2>
+            </c:if>
+
+        </div>
+
+
+    </ui:define>
+
+</ui:composition>
+
+
+</html>

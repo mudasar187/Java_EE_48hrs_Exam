@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+>
+
+
+<ui:composition template="/layout.xhtml">
+
+    <ui:define name="title">
+        Create Book
+    </ui:define>
+
+
+    <ui:define name="content">
+
+        <!--NEW BOOK START-->
+        <!-- Accessible only for admins-->
+        <c:if test="#{userInfoController.adminRoleUser}">
+            <h:form id="createBookForm">
+                <h:panelGrid columns="1">
+                    <h:outputLabel value="Book title: "/>
+                    <h:inputText value="#{bookController.formBookTitle}" id="bookTitle"/><br/>
+
+                    <h:outputLabel value="Book author: "/>
+                    <h:inputText value="#{bookController.formBookAuthor}" id="bookAuthor"/><br/>
+
+                    <h:outputLabel value="Book course : "/>
+                    <h:inputText value="#{bookController.formBookCourse}" id="bookCourse"/><br/>
+
+                    <h:outputLabel value="Book description: "/>
+                    <h:inputTextarea value="#{bookController.formBookDescription}" id="bookDescription"/><br/>
+
+                    <h:commandButton value="Add book" action="#{bookController.createBook}" id="createButton" class="defaultBtn"/>
+                </h:panelGrid>
+            </h:form>
+        </c:if>
+        <!--NEW BOOK END-->
+
+    </ui:define>
+
+</ui:composition>
+
+
+</html>

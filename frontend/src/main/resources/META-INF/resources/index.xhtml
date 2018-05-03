@@ -18,8 +18,14 @@
 
         <h2>UsedBooks Application</h2>
         <br/>
-        <br/>
-        <div class="showBookTable">
+        <sec:authenticated>
+            <c:if test="#{userInfoController.adminRoleUser}">
+                <a id="linkToCreateBookId" href="createbook.jsf" class="btn">Add new book</a>
+            </c:if>
+            <br/>
+            <br/>
+        </sec:authenticated>
+        <div class="showTable">
             <c:set var="bookList" value="#{bookController.allBooks}"/>
 
             <c:if test="#{bookList.size() != 0}">
@@ -27,27 +33,54 @@
 
                     <h:column>
                         <f:facet name="header">Book Name</f:facet>
-                        <h:outputLink value="/ui/bookdetails.jsf">
-                            <h:outputText value="#{books.bookTitle}" />
-                            <f:param name="#{books.bookTitle}" value="#{books.bookAuthor}" />
-                        </h:outputLink>
-                </h:column>
+                        <h:form>
+                            <h:commandLink action="#{bookController.goToDetailPage(books.bookTitle)}">
+                                <h:outputText value="#{books.bookTitle}"/>
+                                <f:param name="title" value="#{books.bookTitle}"/>
+                            </h:commandLink>
+                        </h:form>
+                    </h:column>
+
                     <h:column>
                         <f:facet name="header">Course</f:facet>
                         <h:outputLabel value="#{books.bookAuthor}" class="bookCourse"/>
                     </h:column>
+
                     <h:column>
                         <f:facet name="header">Sellers</f:facet>
                         <h:outputLabel value="#{books.users.size()}" class="bookSellers"/>
                     </h:column>
+
                     <sec:authenticated>
-                        <h:column>
-                            <f:facet name="header">Want to sell book? Get on the list</f:facet>
-                            <h:form>
-                                <h:commandButton value="Add me to list" id="linkToAddUserToBook" action="#{bookController.addUserToBook(userInfoController.userName, books.bookTitle)}" disabled="#{bookController.isUserInBookList(userInfoController.userName, books.bookTitle)}" class="btn"/>
-                                <h:commandButton value="Remove me from list" id="linkToRemoveFromToBook" action="#{bookController.removeUserFromBook(userInfoController.userName, books.bookTitle)}" disabled="#{!bookController.isUserInBookList(userInfoController.userName, books.bookTitle)}" class="btn"/>
-                            </h:form>
-                        </h:column>
+
+                        <c:if test="#{userInfoController.userRoleUser}">
+                            <h:column>
+                                <f:facet name="header">Want to sell book? Get on the list</f:facet>
+                                <h:form>
+                                    <h:commandButton value="Add me to list" id="addUserToListId"
+                                                     action="#{bookController.addUserToBook(userInfoController.userName, books.bookTitle)}"
+                                                     disabled="#{bookController.isUserInBookList(userInfoController.userName, books.bookTitle)}"
+                                                     class="btn"/>
+                                    <h:commandButton value="Remove me from list" id="removeUserFromListId"
+                                                     action="#{bookController.removeUserFromBook(userInfoController.userName, books.bookTitle)}"
+                                                     disabled="#{!bookController.isUserInBookList(userInfoController.userName, books.bookTitle)}"
+                                                     class="btn"/>
+                                </h:form>
+                            </h:column>
+                        </c:if>
+
+                        <c:if test="#{userInfoController.adminRoleUser}">
+                            <h:column>
+                                <f:facet name="header">Want to sell book? Get on the list</f:facet>
+                                <h:form>
+                                    <h:commandButton value="DELETE" id="deleteBookFromListId"
+                                                     action="#{bookController.deleteBook(books.bookTitle)}"
+                                                     class="btn"/>
+                                </h:form>
+                            </h:column>
+                        </c:if>
+                        <br/>
+
                     </sec:authenticated>
                 </h:dataTable>
             </c:if>

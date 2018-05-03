@@ -1,6 +1,5 @@
 package com.ahmmud16.exam;
 
-import com.ahmmud16.exam.po.AdminPO;
 import com.ahmmud16.exam.po.IndexPO;
 import com.ahmmud16.exam.po.LoginPO;
 import com.ahmmud16.exam.po.SignUpPO;
@@ -47,6 +46,7 @@ public abstract class SeleniumTestBase {
     @Test
     public void testCreateAndLogoutUser(){
 
+        //
         assertFalse(home.isLoggedIn());
 
         String username = getUniqueId();
@@ -56,6 +56,7 @@ public abstract class SeleniumTestBase {
         String retypePassword = "123456789";
 
         home.toStartingPage();
+
         SignUpPO signUpPO = home.toSignUp();
         IndexPO indexPO = signUpPO.createUser(username, firstname, lastname, password, retypePassword);
 
