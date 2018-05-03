@@ -77,4 +77,16 @@ a:visited{
     margin: 0 auto;
 }
 
+#sentMessagesTable{
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+}
+
+#receivedMessagesTable{
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+}
+
 

@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/createbook.jsf").access("hasRole('ROLE_ADMIN')")
                     .antMatchers( "/", "/bookdetails.jsf", "/index.jsf", "/signup.jsf", "/assets/**").permitAll()
                     .antMatchers("/javax.faces.resource/**").permitAll()
-                    .antMatchers("/messages.jsf").authenticated()
+                    .antMatchers("/inbox.jsf", "/sendmessage.jsf", "/inbox.jsf").authenticated()
                     .and()
                     .formLogin()
                     .loginPage("/login.jsf")

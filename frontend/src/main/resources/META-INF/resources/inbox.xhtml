@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+
+
+<ui:composition template="/layout.xhtml">
+
+    <ui:define name="title">
+        Inbox
+    </ui:define>
+
+
+    <ui:define name="content">
+
+        <hr/>
+        <h2>Received messages</h2>
+        <c:if test="#{messageReceived.size() == 0}">
+            <h2>No messages sent</h2>
+        </c:if>
+        <div class="showTable">
+            <c:set var="receivedMessages" value="#{messageController.allReceivedMessages}"/>
+
+            <c:if test="#{receivedMessages.size() != 0}">
+                <h:dataTable value="#{receivedMessages}" var="messageReceived" border="1" id="receivedMessagesTable">
+                    <h:column>
+                        <f:facet name="header">Time</f:facet>
+                        <h:outputLabel value="#{messageReceived.createdTime}"/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">From email</f:facet>
+                        <h:outputLabel value="#{messageReceived.senderEmail}"/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Message</f:facet>
+                        <h:outputLabel value="#{messageReceived.text}"/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Reply</f:facet>
+                    <h:form>
+                        <h:commandButton value="Reply"
+                                         action="#{messageController.sendMessage(messageReceived.senderEmail)}"
+                                         id="sendMessageId"
+                                         class="defaultBtn"/>
+                    </h:form>
+                    </h:column>
+
+                </h:dataTable>
+            </c:if>
+        </div>
+        <hr/>
+        <h2>Sent messages</h2>
+        <c:if test="#{sentMessages.size() == 0}">
+            <h2>No messages sent</h2>
+        </c:if>
+        <div class="showTable">
+            <c:set var="sentMessages" value="#{messageController.allSentMessages}"/>
+
+            <c:if test="#{sentMessages.size() != 0}">
+                <h:dataTable value="#{sentMessages}" var="messageSent" border="1" id="sentMessagesTable">
+                    <h:column>
+                        <f:facet name="header">Time</f:facet>
+                        <h:outputLabel value="#{messageSent.createdTime}"/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">To email</f:facet>
+                        <h:outputLabel value="#{messageSent.receiverEmail}"/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Message</f:facet>
+                        <h:outputLabel value="#{messageSent.text}"/>
+                    </h:column>
+
+                </h:dataTable>
+            </c:if>
+        </div>
+
+    </ui:define>
+
+</ui:composition>
+
+
+</html>
