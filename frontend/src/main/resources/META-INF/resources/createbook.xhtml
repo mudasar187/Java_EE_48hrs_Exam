@@ -17,6 +17,7 @@
 
         <!--NEW BOOK START-->
         <!-- Accessible only for admins-->
+        <div class="showTable">
         <c:if test="#{userInfoController.adminRoleUser}">
             <h:form id="createBookForm">
                 <h:panelGrid columns="1">
@@ -36,6 +37,7 @@
                 </h:panelGrid>
             </h:form>
         </c:if>
+        </div>
         <!--NEW BOOK END-->
 
     </ui:define>
