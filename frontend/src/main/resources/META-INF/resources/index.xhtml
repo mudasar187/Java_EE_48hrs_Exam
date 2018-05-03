@@ -27,8 +27,11 @@
 
                     <h:column>
                         <f:facet name="header">Book Name</f:facet>
-                        <h:outputLabel value="#{books.bookTitle}" class="bookName"/>
-                    </h:column>
+                        <h:outputLink value="/ui/bookdetails.jsf">
+                            <h:outputText value="#{books.bookTitle}" />
+                            <f:param name="#{books.bookTitle}" value="#{books.bookAuthor}" />
+                        </h:outputLink>
+                </h:column>
                     <h:column>
                         <f:facet name="header">Course</f:facet>
                         <h:outputLabel value="#{books.bookAuthor}" class="bookCourse"/>
