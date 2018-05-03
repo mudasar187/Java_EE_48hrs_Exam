@@ -31,7 +31,7 @@
     <p><h:outputText value="Hello #{userInfoController.userName} !"/></p>
     </c:if>
 
-    <a id="logoutId" href="logout" class="btn">Log Out</a>
+    <a id="logoutId" href="/logout" class="btn">Log Out</a>
 
     <c:if test="#{userInfoController.adminRoleUser}">
         <p><h:outputText value="Hello admin #{userInfoController.userName} !"/></p>
