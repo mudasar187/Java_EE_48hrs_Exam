@@ -26,6 +26,7 @@ public class DefaultDataInitializerService {
         attempt(() -> userService.createUser("bravo@mail.com", "bravo", "bravo", "123", false));
         attempt(() -> bookService.createBook("Java EE", "Andrea Arcuri", "This is a awesome book!", "Java Enterprise Programming 1"));
         attempt(() -> bookService.createBook("Advanced Java for Dummies", "John Wayne", "Good book to read before Enterprise Programming 1", "Advanced Java"));
+        attempt(() -> bookService.createBook("IONIC", "Andreas Hansen", "Learn IONIC !", "Crossplatform"));
         attempt(() -> bookService.addOrRemoveUserFromBookList("jhonny@mail.com", "Java EE", true));
         attempt(() -> bookService.addOrRemoveUserFromBookList("bravo@mail.com", "Advanced Java for Dummies", true));
 

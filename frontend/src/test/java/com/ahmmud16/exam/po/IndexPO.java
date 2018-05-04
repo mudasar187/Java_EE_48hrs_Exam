@@ -25,18 +25,18 @@ public class IndexPO extends LayoutPO {
         return getDriver().getTitle().contains("Homepage");
     }
 
-    public BookDetailsPO chooseBookJavaEE() {
+    public BookDetailsPO chooseBook(String id) {
         BookDetailsPO bookDetailsPO = new BookDetailsPO(this);
-        getDriver().findElement(By.xpath("//A[@id='bookTable:0:goToDetailsId']")).click();
+        getDriver().findElement(By.xpath("//A[@id='bookTable:"+id+":goToDetailsId']")).click();
         return bookDetailsPO;
     }
 
-    public void clickAddUserToListButton() {
-        getDriver().findElement(By.xpath("//INPUT[@id='bookTable:0:addUserToListId']")).click();
+    public void clickAddUserToListButton(String id) {
+        getDriver().findElement(By.xpath("//INPUT[@id='bookTable:"+id+":addUserToListId']")).click();
     }
 
-    public void clickRemoveUserFromListButton() {
-        getDriver().findElement(By.xpath("//INPUT[@id='bookTable:0:removeUserFromListId']")).click();
+    public void clickRemoveUserFromListButton(String id) {
+        getDriver().findElement(By.xpath("//INPUT[@id='bookTable:"+id+":removeUserFromListId']")).click();
     }
 
     public String checkCountOfSellers(String id) {

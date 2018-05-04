@@ -31,7 +31,7 @@ public class DefaultDataInitializerServiceTest {
     @Test
     public void testInit() {
 
-        assertEquals(2, bookService.getAllBooks().size());
+        assertEquals(3, bookService.getAllBooks().size());
 
         assertEquals(1, bookService.getBook("Java EE").getUsers().size());
         assertEquals(1, bookService.getBook("Advanced Java for Dummies").getUsers().size());

@@ -1,5 +1,6 @@
 package com.ahmmud16.exam.po;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class BookDetailsPO extends LayoutPO {
@@ -17,5 +18,7 @@ public class BookDetailsPO extends LayoutPO {
         return getDriver().getTitle().contains("Book details");
     }
 
-
+    public String getEmailTextFromTable(String mail) {
+        return getDriver().findElement(By.xpath("//LABEL[text()='"+mail+"']")).getText();
+    }
 }
