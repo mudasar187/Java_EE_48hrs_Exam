@@ -1,7 +1,12 @@
 package com.ahmmud16.exam.po;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
@@ -62,6 +67,15 @@ public abstract class LayoutPO extends PageObject {
         assertTrue(po.isOnPage());
 
         return po;
+    }
+
+    public int getNumberOfDisplayedRows(String table){
+        List<WebElement> elements = new ArrayList<>();
+        try{
+            elements = driver.findElements(
+                    By.xpath("//table[@id='"+table+"']//tbody//tr[string-length(text()) > 0]"));
+        }catch (NoSuchElementException e){}
+        return elements.size();
     }
 
 

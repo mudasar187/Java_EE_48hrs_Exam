@@ -5,6 +5,7 @@
         xmlns:sec="http://www.springframework.org/security/tags"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
 >
 
 <ui:composition template="/layout.xhtml">
@@ -32,12 +33,15 @@
                 <h:dataTable value="#{bookList}" var="books" border="1" id="bookTable">
 
                     <h:column>
+
                         <f:facet name="header">Book Name</f:facet>
-                        <h:form>
+                        <h:form prependId="false">
                             <h:commandLink value="#{books.bookTitle}" action="#{bookController.goToDetailPage(books.bookTitle)}" id="goToDetailsId">
                             </h:commandLink>
                         </h:form>
+
                     </h:column>
+
 
                     <h:column>
                         <f:facet name="header">Course</f:facet>
