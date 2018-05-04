@@ -44,144 +44,144 @@ public abstract class SeleniumTestBase {
         assertTrue("Failed to start from Home Page", home.isOnPage());
     }
 
-    @Test
-    public void testCreateAndLogoutUser(){
-
-        //
-        assertFalse(home.isLoggedIn());
-
-        String username = getUniqueId();
-        String firstname = "test1";
-        String lastname = "test1";
-        String password = "123456789";
-        String retypePassword = "123456789";
-
-        home.toStartingPage();
-
-        SignUpPO signUpPO = home.toSignUp();
-        IndexPO indexPO = signUpPO.createUser(username, firstname, lastname, password, retypePassword);
-
-        assertNotNull(indexPO);
-        assertTrue(home.isLoggedIn());
-        assertTrue(home.getDriver().getPageSource().contains(username));
-
-        home.doLogout();
-
-        assertFalse(home.isLoggedIn());
-        assertFalse(home.getDriver().getPageSource().contains(username));
-    }
-
-    @Test
-    public void testCreateUserWithNonMatchPassword() {
-
-        String username = "username@mail.com";
-        String firstname = "test2";
-        String lastname = "test2";
-        String password = "123456789";
-        String retypePassword = "1234";
-
-        SignUpPO signUpPO = home.toSignUp();
-        IndexPO indexPO = signUpPO.createUser(username, firstname, lastname, password, retypePassword);
-
-        assertNull(indexPO);
-        assertTrue(signUpPO.isOnPage());
-        assertFalse(home.isLoggedIn());
-    }
-
-    @Test
-    public void testLoginWithNonExistingUser() {
-
-        assertFalse(home.isLoggedIn());
-
-        String username = "usernameOne@notexists.com";
-        String password = "1234";
-
-        LoginPO loginPO = home.toLogin();
-
-        assertTrue(loginPO.isOnPage());
-
-        IndexPO indexPO = loginPO.enterCredentials(username, password);
-
-        assertNull(indexPO);
-        assertTrue(loginPO.isOnPage());
-        assertFalse(home.isLoggedIn());
-    }
-
-    @Test
-    public void testCreateAndThenLoginWithWrongPassword() {
-
-        assertFalse(home.isLoggedIn());
-
-        String username = "test3@mail.com";
-        String firstname = "test3";
-        String lastname = "test3";
-        String password = "123456789";
-        String retypePassword = "123456789";
-        String wrongPassWord = "123";
-
-        SignUpPO signUpPO = home.toSignUp();
-        IndexPO indexPO = signUpPO.createUser(username, firstname, lastname, password, retypePassword);
-
-        assertTrue(home.getDriver().getPageSource().contains(username));
-        assertNotNull(indexPO);
-        assertTrue(home.isOnPage());
-
-        indexPO.doLogout();
-
-        assertTrue(home.isOnPage());
-
-        LoginPO loginPO = home.toLogin();
-
-        assertTrue(loginPO.isOnPage());
-
-        loginPO.enterCredentials(username, wrongPassWord);
-
-        assertNotNull(loginPO);
-        assertFalse(home.isLoggedIn());
-
-    }
-
-    @Test
-    public void testCreateTwoUsersWithSameUsername() {
-
-        assertFalse(home.isLoggedIn());
-
-        String username = "test4@mail.com";
-        String firstname = "test4";
-        String lastname = "test4";
-        String password = "123456789";
-        String retypePassword = "123456789";
-
-        home.toStartingPage();
-
-        SignUpPO signUpPO = home.toSignUp();
-
-        IndexPO indexPO = signUpPO.createUser(username, firstname, lastname, password, retypePassword);
-
-        assertNotNull(indexPO);
-        assertTrue(home.isLoggedIn());
-        assertTrue(home.getDriver().getPageSource().contains(username));
-
-        home.doLogout();
-        home.toSignUp();
-
-        IndexPO indexPO1 = signUpPO.createUser(username, firstname, lastname, password, retypePassword);
-
-        assertTrue(signUpPO.isOnPage());
-        assertNull(indexPO1);
-        assertFalse(home.isLoggedIn());
-    }
-
-    @Test
-    public void testDefaultBooks() {
-        assertFalse(home.isLoggedIn());
-
-        home.toStartingPage();
-
-        // We have two books initialized as default, we want to get two rows
-        assertEquals(2, home.getNumberOfDisplayedRows("bookTable"));
-
-    }
+//    @Test
+//    public void testCreateAndLogoutUser(){
+//
+//        //
+//        assertFalse(home.isLoggedIn());
+//
+//        String username = getUniqueId();
+//        String firstname = "test1";
+//        String lastname = "test1";
+//        String password = "123456789";
+//        String retypePassword = "123456789";
+//
+//        home.toStartingPage();
+//
+//        SignUpPO signUpPO = home.toSignUp();
+//        IndexPO indexPO = signUpPO.createUser(username, firstname, lastname, password, retypePassword);
+//
+//        assertNotNull(indexPO);
+//        assertTrue(home.isLoggedIn());
+//        assertTrue(home.getDriver().getPageSource().contains(username));
+//
+//        home.doLogout();
+//
+//        assertFalse(home.isLoggedIn());
+//        assertFalse(home.getDriver().getPageSource().contains(username));
+//    }
+//
+//    @Test
+//    public void testCreateUserWithNonMatchPassword() {
+//
+//        String username = "username@mail.com";
+//        String firstname = "test2";
+//        String lastname = "test2";
+//        String password = "123456789";
+//        String retypePassword = "1234";
+//
+//        SignUpPO signUpPO = home.toSignUp();
+//        IndexPO indexPO = signUpPO.createUser(username, firstname, lastname, password, retypePassword);
+//
+//        assertNull(indexPO);
+//        assertTrue(signUpPO.isOnPage());
+//        assertFalse(home.isLoggedIn());
+//    }
+//
+//    @Test
+//    public void testLoginWithNonExistingUser() {
+//
+//        assertFalse(home.isLoggedIn());
+//
+//        String username = "usernameOne@notexists.com";
+//        String password = "1234";
+//
+//        LoginPO loginPO = home.toLogin();
+//
+//        assertTrue(loginPO.isOnPage());
+//
+//        IndexPO indexPO = loginPO.enterCredentials(username, password);
+//
+//        assertNull(indexPO);
+//        assertTrue(loginPO.isOnPage());
+//        assertFalse(home.isLoggedIn());
+//    }
+//
+//    @Test
+//    public void testCreateAndThenLoginWithWrongPassword() {
+//
+//        assertFalse(home.isLoggedIn());
+//
+//        String username = "test3@mail.com";
+//        String firstname = "test3";
+//        String lastname = "test3";
+//        String password = "123456789";
+//        String retypePassword = "123456789";
+//        String wrongPassWord = "123";
+//
+//        SignUpPO signUpPO = home.toSignUp();
+//        IndexPO indexPO = signUpPO.createUser(username, firstname, lastname, password, retypePassword);
+//
+//        assertTrue(home.getDriver().getPageSource().contains(username));
+//        assertNotNull(indexPO);
+//        assertTrue(home.isOnPage());
+//
+//        indexPO.doLogout();
+//
+//        assertTrue(home.isOnPage());
+//
+//        LoginPO loginPO = home.toLogin();
+//
+//        assertTrue(loginPO.isOnPage());
+//
+//        loginPO.enterCredentials(username, wrongPassWord);
+//
+//        assertNotNull(loginPO);
+//        assertFalse(home.isLoggedIn());
+//
+//    }
+//
+//    @Test
+//    public void testCreateTwoUsersWithSameUsername() {
+//
+//        assertFalse(home.isLoggedIn());
+//
+//        String username = "test4@mail.com";
+//        String firstname = "test4";
+//        String lastname = "test4";
+//        String password = "123456789";
+//        String retypePassword = "123456789";
+//
+//        home.toStartingPage();
+//
+//        SignUpPO signUpPO = home.toSignUp();
+//
+//        IndexPO indexPO = signUpPO.createUser(username, firstname, lastname, password, retypePassword);
+//
+//        assertNotNull(indexPO);
+//        assertTrue(home.isLoggedIn());
+//        assertTrue(home.getDriver().getPageSource().contains(username));
+//
+//        home.doLogout();
+//        home.toSignUp();
+//
+//        IndexPO indexPO1 = signUpPO.createUser(username, firstname, lastname, password, retypePassword);
+//
+//        assertTrue(signUpPO.isOnPage());
+//        assertNull(indexPO1);
+//        assertFalse(home.isLoggedIn());
+//    }
+//
+//    @Test
+//    public void testDefaultBooks() {
+//        assertFalse(home.isLoggedIn());
+//
+//        home.toStartingPage();
+//
+//        // We have two books initialized as default, we want to get two rows
+//        assertEquals(2, home.getNumberOfDisplayedRows("bookTable"));
+//
+//    }
 
     @Test
     public void testRegisterSelling() {
@@ -210,6 +210,40 @@ public abstract class SeleniumTestBase {
         // We should now see 4 columns which means there is an extra column for mark selling book or not
         assertEquals(4, home.getNumberOfDisplayedColumns("bookTable"));
 
+        // Check how many count there is in seller for first book and second book
+        int getValueOfSellersCurrentFirstBook = Integer.valueOf(home.checkCountOfSellers("0"));
+        int getValueOfSellersCurrentSecondbook = Integer.valueOf(home.checkCountOfSellers("1"));
+
+
+        // Now user want to sell a book first book
+        home.clickAddUserToListButton();
+
+        // Check again for how many seller there is in seller for first book should increment by one
+        // Check also sellers for second book, should stay same
+        int getValueOfSellersAfterAddUserFirstbook = Integer.valueOf(home.checkCountOfSellers("0"));
+        int getValueOfSellersAfterAddUserFirstbookForSecondbook = Integer.valueOf(home.checkCountOfSellers("1"));
+
+        assertEquals(getValueOfSellersCurrentFirstBook+1, getValueOfSellersAfterAddUserFirstbook);
+        assertEquals(getValueOfSellersCurrentSecondbook, getValueOfSellersAfterAddUserFirstbookForSecondbook);
+
+        // Click on remove to remove user from list
+        home.clickRemoveUserFromListButton();
+
+        // Check how many count there is in seller
+        int getValueOfSellerAfterRemoveUserFirstbook = Integer.valueOf(home.checkCountOfSellers("0"));
+        assertEquals(getValueOfSellersCurrentFirstBook,getValueOfSellerAfterRemoveUserFirstbook);
+
+        // Click selling again for firstbook
+        home.clickAddUserToListButton();
+        int a = Integer.valueOf(home.checkCountOfSellers("0"));
+        assertEquals(2, a);
+
+        // Log out
+        home.doLogout();
+
+        // Now check if the sellers has same value when logout
+        int b = Integer.valueOf(home.checkCountOfSellers("0"));
+        assertEquals(a, b);
 
     }
 

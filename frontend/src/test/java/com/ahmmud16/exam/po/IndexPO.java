@@ -31,4 +31,16 @@ public class IndexPO extends LayoutPO {
         return bookDetailsPO;
     }
 
+    public void clickAddUserToListButton() {
+        getDriver().findElement(By.xpath("//INPUT[@id='bookTable:0:addUserToListId']")).click();
+    }
+
+    public void clickRemoveUserFromListButton() {
+        getDriver().findElement(By.xpath("//INPUT[@id='bookTable:0:removeUserFromListId']")).click();
+    }
+
+    public String checkCountOfSellers(String id) {
+        return getDriver().findElement(By.xpath("//LABEL[@id='bookTable:"+id+":sellerId']")).getText();
+    }
+
 }
