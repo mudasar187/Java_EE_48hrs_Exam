@@ -21,4 +21,10 @@ public class BookDetailsPO extends LayoutPO {
     public String getEmailTextFromTable(String mail) {
         return getDriver().findElement(By.xpath("//LABEL[text()='"+mail+"']")).getText();
     }
+
+    public SendMessagePO clickSendMessageButton(String id) {
+        SendMessagePO sendMessagePO = new SendMessagePO(this);
+        getDriver().findElement(By.xpath("//INPUT[@id='sellerTable:"+id+":goToDetailsId']")).click();
+        return sendMessagePO;
+    }
 }

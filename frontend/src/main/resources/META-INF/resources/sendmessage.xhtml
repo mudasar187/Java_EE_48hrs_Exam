@@ -19,8 +19,8 @@
             <h:outputLabel value="#{messageController.receiver}"/>
         </h2>
         <p>Write your message here</p>
-        <h:form>
-            <h:inputTextarea value="#{messageController.messageText}" id="bookDescription"/><br/>
+        <h:form id="sendMessageForm">
+            <h:inputText value="#{messageController.messageText}" id="bookDescription"/><br/>
             <h:commandButton value="Send message" action="#{messageController.sendMessageToUser}" id="sendMessageId"
                              class="defaultBtn"/>
             <c:if test="#{messageController.messageSent}">

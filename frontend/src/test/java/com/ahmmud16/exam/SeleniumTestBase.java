@@ -1,9 +1,6 @@
 package com.ahmmud16.exam;
 
-import com.ahmmud16.exam.po.BookDetailsPO;
-import com.ahmmud16.exam.po.IndexPO;
-import com.ahmmud16.exam.po.LoginPO;
-import com.ahmmud16.exam.po.SignUpPO;
+import com.ahmmud16.exam.po.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -315,6 +312,183 @@ public abstract class SeleniumTestBase {
         home.doLogout();
 
         assertFalse(home.isLoggedIn());
+
+    }
+
+    @Test
+    public void testMessages() {
+
+        assertFalse(home.isLoggedIn());
+
+        String userOne = "foo@mail.com";
+        String userOnePassword = "123";
+
+        String userTwo = "bar@mail.com";
+        String userTwoPassword = "123";
+
+        // Go to homepage
+        home.toStartingPage();
+
+        // userOne log in
+        LoginPO loginPO = home.toLogin();
+
+        assertNotNull(loginPO);
+        assertTrue(loginPO.isOnPage());
+
+        IndexPO indexPO = loginPO.enterCredentials(userOne, userOnePassword);
+
+        assertNotNull(indexPO);
+        assertTrue(indexPO.isOnPage());
+
+        // Click "add me to list" button
+        home.clickAddUserToListButton("2");
+
+        // Log out userOne
+        home.doLogout();
+
+        // Login with userTwo
+        LoginPO loginPO1 = home.toLogin();
+
+        IndexPO indexPO1 = loginPO1.enterCredentials(userTwo, userTwoPassword);
+
+        assertNotNull(indexPO1);
+        assertTrue(indexPO1.isOnPage());
+
+        // Go to book details page
+        BookDetailsPO bookDetailsPO = indexPO1.chooseBook("2");
+
+        assertNotNull(bookDetailsPO);
+        assertTrue(bookDetailsPO.isOnPage());
+
+        // Click send message button
+        SendMessagePO sendMessagePO = bookDetailsPO.clickSendMessageButton("0");
+
+        // Text to send
+        String text = "Hello!";
+        String moreText = "Hello again!!";
+
+        // Create message and send
+        sendMessagePO.createMessage(text);
+        sendMessagePO.createMessage(moreText);
+
+        // Log out userTwo
+        home.doLogout();
+
+        home.toLogin();
+
+        // Log in userOne again
+        IndexPO indexPO2 = loginPO1.enterCredentials(userOne, userOnePassword);
+
+        // Go to inbox page
+        InboxPO inboxPO = indexPO2.toInbox();
+
+        assertNotNull(inboxPO);
+        assertTrue(inboxPO.isOnPage());
+
+        // Check if there is any reply from userTwo
+        String getEmail = inboxPO.getTextFromTable(userTwo);
+        String getMessage = inboxPO.getTextFromTable(text);
+
+        // Assert that email is userTwo and text is same as what userOne sent
+        assertEquals(userTwo, getEmail);
+        assertEquals(text, getMessage);
+
+
+
+        // userOne want to reply
+        SendMessagePO sendMessagePO1 = inboxPO.clickReplyButton("0");
+
+        assertNotNull(sendMessagePO1);
+        assertTrue(sendMessagePO1.isOnPage());
+
+        String replyMessage = "Hello back at ya!";
+
+        // Reply message
+        sendMessagePO1.createMessage(replyMessage);
+
+        // Log out userOne
+        home.doLogout();
+
+        // userTwo log in
+        home.toLogin();
+
+        IndexPO indexPO3 = loginPO1.enterCredentials(userTwo, userTwoPassword);
+
+        assertNotNull(indexPO3);
+        assertTrue(indexPO3.isOnPage());
+
+        // userTwo go to inbox
+        InboxPO inboxPO1 = home.toInbox();
+
+        assertNotNull(inboxPO1);
+        assertTrue(inboxPO1.isOnPage());
+
+        String checkEmailFromUser = inboxPO1.getTextFromTable(userOne);
+        String checkTextFromUserOne = inboxPO1.getTextFromTable(replyMessage);
+
+        assertEquals(userOne, checkEmailFromUser);
+        assertEquals(replyMessage, checkTextFromUserOne);
+
+        home.doLogout();
+
+        assertFalse(home.isLoggedIn());
+    }
+
+
+    @Test
+    public void testAdmin() {
+
+        assertFalse(home.isLoggedIn());
+
+        String user = "bar@mail.com";
+        String password = "123";
+
+        home.toStartingPage();
+
+        // Go to login page
+        LoginPO loginPO = home.toLogin();
+
+        assertNotNull(loginPO);
+        assertTrue(loginPO.isOnPage());
+
+        // Log in
+        IndexPO indexPO = loginPO.enterCredentials(user, password);
+
+        assertNotNull(indexPO);
+        assertTrue(indexPO.isOnPage());
+
+        // Check how many rows
+        int rows = indexPO.getNumberOfDisplayedRows("bookTable");
+        assertEquals(3, rows);
+
+        // delete a row, only admin can do it
+        indexPO.clickDeleteButton("0");
+
+        int newRows = indexPO.getNumberOfDisplayedRows("bookTable");
+        assertEquals(2, newRows);
+
+        CreateBookPO createBookPO = indexPO.clickCreateABook();
+
+        assertNotNull(createBookPO);
+        assertTrue(createBookPO.isOnPage());
+
+        String bookTitle = "test";
+        String bookAuthor = "test";
+        String bookCourse = "test";
+        String bookDesc = "test";
+
+        createBookPO.createBook(bookTitle, bookAuthor, bookCourse, bookDesc);
+
+        createBookPO.clickCreateBook();
+
+        home.toHomePage();
+
+        int newRowsAgain = indexPO.getNumberOfDisplayedRows("bookTable");
+
+
+        assertEquals(3, newRowsAgain);
+
+        indexPO.doLogout();
 
     }
 

@@ -43,4 +43,14 @@ public class IndexPO extends LayoutPO {
         return getDriver().findElement(By.xpath("//LABEL[@id='bookTable:"+id+":sellerId']")).getText();
     }
 
+    public void clickDeleteButton(String id) {
+        getDriver().findElement(By.xpath("//INPUT[@id='bookTable:"+id+":deleteBookFromListId']")).click();
+    }
+
+    public CreateBookPO clickCreateABook() {
+        CreateBookPO createBookPO = new CreateBookPO(this);
+        getDriver().findElement(By.xpath("//A[@id='linkToCreateBookId']")).click();
+        return createBookPO;
+    }
+
 }

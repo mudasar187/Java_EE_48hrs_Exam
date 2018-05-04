@@ -74,7 +74,7 @@
                         <c:if test="#{userInfoController.adminRoleUser}">
                             <h:column>
                                 <f:facet name="header">Want to sell book? Get on the list</f:facet>
-                                <h:form>
+                                <h:form prependId="false">
                                     <h:commandButton value="DELETE" id="deleteBookFromListId"
                                                      action="#{bookController.deleteBook(books.bookTitle)}"
                                                      class="btn"/>

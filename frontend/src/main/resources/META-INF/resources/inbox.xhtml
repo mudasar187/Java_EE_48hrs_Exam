@@ -33,17 +33,17 @@
 
                     <h:column>
                         <f:facet name="header">From email</f:facet>
-                        <h:outputLabel value="#{messageReceived.senderEmail}"/>
+                        <h:outputLabel value="#{messageReceived.senderEmail}" id="receivedEmailAdress"/>
                     </h:column>
 
                     <h:column>
                         <f:facet name="header">Message</f:facet>
-                        <h:outputLabel value="#{messageReceived.text}"/>
+                        <h:outputLabel value="#{messageReceived.text}" id="receivedText"/>
                     </h:column>
 
                     <h:column>
                         <f:facet name="header">Reply</f:facet>
-                    <h:form>
+                    <h:form prependId="false" id="replyBtn">
                         <h:commandButton value="Reply"
                                          action="#{messageController.sendMessage(messageReceived.senderEmail)}"
                                          id="sendMessageId"
@@ -71,12 +71,12 @@
 
                     <h:column>
                         <f:facet name="header">To email</f:facet>
-                        <h:outputLabel value="#{messageSent.receiverEmail}"/>
+                        <h:outputLabel value="#{messageSent.receiverEmail}" id="sentEmailAdress"/>
                     </h:column>
 
                     <h:column>
                         <f:facet name="header">Message</f:facet>
-                        <h:outputLabel value="#{messageSent.text}"/>
+                        <h:outputLabel value="#{messageSent.text}" id="sentMessages"/>
                     </h:column>
 
                 </h:dataTable>

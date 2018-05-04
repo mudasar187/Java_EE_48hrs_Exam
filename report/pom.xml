@@ -46,22 +46,20 @@
         </pluginManagement>
 
 
-        <!-- Disconnection so application can start and run faster, enable when project is finished -->
-
-        <!--<plugins>-->
-            <!--<plugin>-->
-                <!--<groupId>org.owasp</groupId>-->
-                <!--<artifactId>dependency-check-maven</artifactId>-->
-                <!--<version>3.1.2</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<goals>-->
-                            <!--<goal>check</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
-        <!--</plugins>-->
+        <plugins>
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>3.1.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
 
     </build>
 
