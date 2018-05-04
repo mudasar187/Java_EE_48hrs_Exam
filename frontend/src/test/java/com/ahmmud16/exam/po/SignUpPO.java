@@ -10,7 +10,7 @@ public class SignUpPO extends LayoutPO{
 
     @Override
     public boolean isOnPage() {
-        return getDriver().getTitle().contains("Sign Up");
+        return getDriver().getTitle().contains("Signup");
     }
 
     public IndexPO createUser(String username, String firstname, String lastname, String password, String retypePassword){

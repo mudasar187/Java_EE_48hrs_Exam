@@ -27,7 +27,7 @@ public abstract class LayoutPO extends PageObject {
 
     public IndexPO doLogout(){
 
-        clickAndWait("logoutId");
+        clickAndWait("linktoLogoutId");
 
         IndexPO po = new IndexPO(this);
         assertTrue(po.isOnPage());
@@ -44,18 +44,33 @@ public abstract class LayoutPO extends PageObject {
         return po;
     }
 
-    public AdminPO toAdmin() {
-        clickAndWait("adminId");
+    public InboxPO toInbox() {
 
-        AdminPO po = new AdminPO(this);
+        clickAndWait("linkToInboxId");
+
+        InboxPO po = new InboxPO(this);
         assertTrue(po.isOnPage());
 
         return po;
     }
 
+    public IndexPO toHomePage() {
+
+        clickAndWait("linkToHomePageId");
+
+        IndexPO po = new IndexPO(this);
+        assertTrue(po.isOnPage());
+
+        return po;
+    }
+
+
+
+
+
     public boolean isLoggedIn(){
 
-        return getDriver().findElements(By.id("logoutId")).size() > 0 &&
+        return getDriver().findElements(By.id("linktoLogoutId")).size() > 0 &&
                 getDriver().findElements((By.id("linkToSignupId"))).isEmpty();
     }
 }
