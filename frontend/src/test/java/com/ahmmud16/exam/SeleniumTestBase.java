@@ -171,4 +171,9 @@ public abstract class SeleniumTestBase {
         assertFalse(home.isLoggedIn());
     }
 
+    @Test
+    public void testThatThereIsTooBooksInHomePage() {
+
+    }
+
 }
