@@ -20,7 +20,7 @@ public abstract class LayoutPO extends PageObject {
         super(other);
     }
 
-    public SignUpPO toSignUp(){
+    public SignUpPO toSignUp() {
 
         clickAndWait("linkToSignupId");
 
@@ -30,7 +30,7 @@ public abstract class LayoutPO extends PageObject {
         return po;
     }
 
-    public IndexPO doLogout(){
+    public IndexPO doLogout() {
 
         clickAndWait("linktoLogoutId");
 
@@ -69,20 +69,23 @@ public abstract class LayoutPO extends PageObject {
         return po;
     }
 
-    public int getNumberOfDisplayedRows(String table){
-        List<WebElement> elements = new ArrayList<>();
-        try{
-            elements = driver.findElements(
-                    By.xpath("//table[@id='"+table+"']//tbody//tr[string-length(text()) > 0]"));
-        }catch (NoSuchElementException e){}
-        return elements.size();
+    public int getNumberOfDisplayedRows(String table) {
+        int rows = 0;
+        rows = driver.findElements(
+                By.xpath("//table[@id='" + table + "']//tbody//tr[string-length(text()) > 0]")).size();
+
+        return rows;
+    }
+
+    public int getNumberOfDisplayedColumns(String table) {
+        int columns = 0;
+        columns = driver.findElements(
+                By.xpath("//table[@id='" + table + "']//tbody//tr[1]//td")).size();
+        return columns;
     }
 
 
-
-
-
-    public boolean isLoggedIn(){
+    public boolean isLoggedIn() {
 
         return getDriver().findElements(By.id("linktoLogoutId")).size() > 0 &&
                 getDriver().findElements((By.id("linkToSignupId"))).isEmpty();

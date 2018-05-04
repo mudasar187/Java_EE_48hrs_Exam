@@ -34,7 +34,7 @@
 
                     <h:column>
 
-                        <f:facet name="header">Book Name</f:facet>
+                        <f:facet name="header">Book</f:facet>
                         <h:form prependId="false">
                             <h:commandLink value="#{books.bookTitle}" action="#{bookController.goToDetailPage(books.bookTitle)}" id="goToDetailsId">
                             </h:commandLink>
@@ -44,7 +44,7 @@
 
 
                     <h:column>
-                        <f:facet name="header">Course</f:facet>
+                        <f:facet name="header">Author</f:facet>
                         <h:outputLabel value="#{books.bookAuthor}" class="bookCourse"/>
                     </h:column>
 
